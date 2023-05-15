@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    
+    <GAME NAME="Metal Slug Advance" CONSOLE="Game Boy Advance" GENRE="Run and Gun"
+        URLIMAGEM="https://media.retroachievements.org/Images/069381.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Mario and Luigi: Superstar Saga" CONSOLE="Game Boy Advance" GENRE="Turn-based RPG"
+        URLIMAGEM="https://media.retroachievements.org/Images/014492.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Legend of Zelda, The: A Link to the Past and Four Swords" CONSOLE="Game Boy Advance" GENRE="Action-Adventure"
+        URLIMAGEM="https://media.retroachievements.org/Images/022503.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Pokemon Emerald Version" CONSOLE="Game Boy Advance" GENRE="Turn-based RPG"
+        URLIMAGEM="https://media.retroachievements.org/Images/014406.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Metroid Fusion" CONSOLE="Game Boy Advance" GENRE="Metroidvania"
+        URLIMAGEM="https://media.retroachievements.org/Images/000649.png" 
+        URLROOM="nada"/>
+    
+    <GAME NAME="Crash Bandicoot" CONSOLE="PlayStation" GENRE="3D Platforming"
+        URLIMAGEM="https://media.retroachievements.org/Images/027330.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Metal Gear Solid" CONSOLE="PlayStation" GENRE="Action"
+        URLIMAGEM="https://media.retroachievements.org/Images/046645.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Resident Evil 3: Nemesis" CONSOLE="PlayStation" GENRE="Survival Horror"
+        URLIMAGEM="https://media.retroachievements.org/Images/047497.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Silent Hill" CONSOLE="PlayStation" GENRE="Survival Horror"
+        URLIMAGEM="https://media.retroachievements.org/Images/045302.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Tomb Raider" CONSOLE="PlayStation" GENRE="Action-Adventure"
+        URLIMAGEM="https://media.retroachievements.org/Images/026539.png" 
+        URLROOM="nada"/>
+    
+    <GAME NAME="Mega Man" CONSOLE="Atari 2600" GENRE="Platforming"
+        URLIMAGEM="https://media.retroachievements.org/Images/039297.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Pac-Man 4K" CONSOLE="Atari 2600" GENRE="Arcade"
+        URLIMAGEM="https://media.retroachievements.org/Images/019939.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Tetris26" CONSOLE="Atari 2600" GENRE="Puzzle"
+        URLIMAGEM="https://media.retroachievements.org/Images/020116.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Garfield" CONSOLE="Atari 2600" GENRE="Arcade"
+        URLIMAGEM="https://media.retroachievements.org/Images/047779.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Popeye" CONSOLE="Atari 2600" GENRE="Maze Chase"
+        URLIMAGEM="https://media.retroachievements.org/Images/058473.png" 
+        URLROOM="nada"/>
+    
+    <GAME NAME="Sonic the Hedgehog" CONSOLE="Master System" GENRE="Platforming"
+        URLIMAGEM="https://media.retroachievements.org/Images/010429.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Michael Jackson's Moonwalker" CONSOLE="Master System" GENRE="Action"
+        URLIMAGEM="https://media.retroachievements.org/Images/056029.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Ayrton Senna's Super Monaco GP II" CONSOLE="Master System" GENRE="Race"
+        URLIMAGEM="https://media.retroachievements.org/Images/010618.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Aladdin" CONSOLE="Master System" GENRE="2D Platforming"
+        URLIMAGEM="https://media.retroachievements.org/Images/056303.png" 
+        URLROOM="nada"/>
+    <GAME NAME="Golden Axe" CONSOLE="Master System" GENRE="Beat 'em Up"
+        URLIMAGEM="https://media.retroachievements.org/Images/017272.png" 
+        URLROOM="nada"/>
+    
+    <USR NAME="Luiz" EMAIL="dudu@email.com" PASSWORD="Run and Gun"  />
+    
+</dataset>

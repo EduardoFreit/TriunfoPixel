@@ -10,7 +10,6 @@ import javax.faces.application.Application;
 import javax.faces.component.UIViewRoot;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.primefaces.context.PrimeRequestContext;
 
 
 public class Util {

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package br.ifpe.triunfopixel.bean;
 
 import br.ifpe.triunfopixel.model.Game;
@@ -12,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.inject.Inject;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +17,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GameBean implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
 
     private String ola = "olaaa";
      private List<Game> listGames = new ArrayList<>();

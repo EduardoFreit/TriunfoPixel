@@ -1,22 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.ifpe.triunfopixel.service;
 
 import br.ifpe.triunfopixel.dao.BaseJPA;
 import br.ifpe.triunfopixel.model.Game;
-import br.ifpe.triunfopixel.dao.DAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
 
-/**
- *
- * @author lepf9
- */
 public class GameService extends BaseJPA<Game> implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
 
     public GameService() {
         super(Game.class);

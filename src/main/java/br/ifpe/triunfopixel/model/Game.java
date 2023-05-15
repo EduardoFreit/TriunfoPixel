@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.ifpe.triunfopixel.model;
 
 import java.io.Serializable;
@@ -12,10 +8,6 @@ import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *
- * @author lepf9
- */
 @Entity
 @Getter
 @Setter

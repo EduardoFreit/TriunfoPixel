@@ -1,11 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.ifpe.triunfopixel.tests;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -17,10 +11,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
-/**
- *
- * @author lepf9
- */
 public class Teste {
 
     protected static EntityManagerFactory emf;

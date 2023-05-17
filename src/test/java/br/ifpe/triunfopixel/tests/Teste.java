@@ -1,7 +1,7 @@
 package br.ifpe.triunfopixel.tests;
 
 import br.ifpe.triunfopixel.service.GameService;
-import br.ifpe.triunfopixel.service.LoginService;
+import br.ifpe.triunfopixel.service.UserService;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -18,7 +18,7 @@ import org.junit.BeforeClass;
 public class Teste {
 
     protected static GameService gameService;
-    protected static LoginService loginService;
+    protected static UserService userService;
     protected static Logger logger;
 
     @BeforeClass
@@ -26,7 +26,7 @@ public class Teste {
         logger = Logger.getGlobal();
         logger.setLevel(Level.INFO);
         gameService = new GameService();
-        loginService = new LoginService();
+        userService = new UserService();
         DbUnitUtil.inserirDados();
     }
 

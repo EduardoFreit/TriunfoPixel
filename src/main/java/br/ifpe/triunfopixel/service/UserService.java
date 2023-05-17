@@ -3,16 +3,17 @@ package br.ifpe.triunfopixel.service;
 import br.ifpe.triunfopixel.dao.BaseJPA;
 import static br.ifpe.triunfopixel.dao.DAO.getEntityManager;
 import br.ifpe.triunfopixel.model.Usr;
+import br.ifpe.triunfopixel.util.Util;
 import java.io.Serializable;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class LoginService extends BaseJPA<Usr> implements Serializable {
+public class UserService extends BaseJPA<Usr> implements Serializable {
     
     private static final long serialVersionUID = 1L;
 
-    public LoginService() {
+    public UserService() {
         super(Usr.class);
     }
     
@@ -36,5 +37,14 @@ public class LoginService extends BaseJPA<Usr> implements Serializable {
                 .findFirst()
                 .orElse(null);
     }
+
+    @Override
+    public void insert(Usr user) {
+        String encryptPassword = Util.md5(user.getPassword()); 
+        user.setPassword(encryptPassword); 
+        super.insert(user);
+    }
+    
+    
     
 }

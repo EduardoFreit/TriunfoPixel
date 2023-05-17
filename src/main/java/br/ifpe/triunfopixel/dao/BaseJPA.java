@@ -47,7 +47,7 @@ public abstract class BaseJPA<T> {
         return returnedList;
     }
     
-    public T findById(Integer id) {
+    public T findById(Long id) {
         T instancia = em.find(cls, id);
         return instancia;
     }

@@ -13,7 +13,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,7 +21,7 @@ import lombok.Setter;
 import org.primefaces.PrimeFaces;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 @Getter
 @Setter
 public class LoginBean implements Serializable {

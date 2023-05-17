@@ -14,7 +14,8 @@ import static org.junit.Assert.*;
         String password = "123";
         Usr usuario = userService.login(email, Util.md5(password));
         
-        assertTrue(usuario.getId().equals(1L));
+        assertTrue(usuario.getName().equals("jorge"));
+        assertTrue(usuario.getEmail().equals("jorge@email.com"));
     }
     
     @Test

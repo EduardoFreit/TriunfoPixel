@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
 
 public class Util {
 
-    public final static String LOGIN_PAGE = "login.xhtml";
+    public final static String LOGIN_PAGE = "/login.xhtml";
+    public final static String HOME_PAGE = "/games.xhtml";
 
     public static FacesContext getFacesContext() {
         return FacesContext.getCurrentInstance();

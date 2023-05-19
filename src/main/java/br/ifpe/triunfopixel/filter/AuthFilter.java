@@ -3,6 +3,7 @@ package br.ifpe.triunfopixel.filter;
 import br.ifpe.triunfopixel.util.Util;
 import br.ifpe.triunfopixel.model.Usr;
 import java.io.IOException;
+import javax.faces.application.ResourceHandler;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -13,7 +14,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(filterName = "AuthFilter", urlPatterns = { "/*" })
+//@WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml" })
 public class AuthFilter implements Filter {
     
     public AuthFilter() {
@@ -28,21 +29,29 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpRequest.setCharacterEncoding("UTF-8");
 
             Usr loginPerson = Util.getLoginUSer(httpRequest);
             String reqURL = httpRequest.getServletPath();
+            
+            System.out.println(httpRequest.getContextPath());
             if (loginPerson == null) {
                 if (!reqURL.contains(Util.LOGIN_PAGE)) {
-                    ((HttpServletResponse) response).sendRedirect(Util.LOGIN_PAGE);
+                    httpResponse.sendRedirect(httpRequest.getContextPath() + Util.LOGIN_PAGE);
                 }
+            } else {
+                httpResponse.sendRedirect(httpRequest.getContextPath() + Util.HOME_PAGE);
             }
+            
+            
 
-            chain.doFilter(request, response);
-        } catch (IOException | ServletException t) {
+            chain.doFilter(httpRequest, httpResponse);
+        } catch (Exception t) {
             System.err.println(t.getMessage());
         }
     }
+
 
     @Override
     public void destroy() {

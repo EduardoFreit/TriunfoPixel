@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package br.ifpe.triunfopixel.bean;
 
-import br.ifpe.triunfopixel.model.Game;
 import br.ifpe.triunfopixel.model.Usr;
-import br.ifpe.triunfopixel.service.GameService;
 import br.ifpe.triunfopixel.service.UserService;
 import br.ifpe.triunfopixel.util.Util;
 import java.io.Serializable;

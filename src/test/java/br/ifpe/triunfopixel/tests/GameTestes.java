@@ -66,14 +66,14 @@ import static org.junit.Assert.*;
     @Test
     public void removeGame() {
         List<Game> listGames = gameService.listAll();
-        assertTrue(listGames.size() == 21);
+        assertTrue(listGames.size() == 20);
         
         Game gameDelete = gameService.findById(1L);
         
         gameService.remove(gameDelete);
         
         listGames = gameService.listAll();
-        assertTrue(listGames.size() == 20);
+        assertTrue(listGames.size() == 19);
     }
 */
 }

@@ -1,6 +1,7 @@
 package br.ifpe.triunfopixel.bean;
 
 import br.ifpe.triunfopixel.model.Game;
+import br.ifpe.triunfopixel.service.ConsoleService;
 import br.ifpe.triunfopixel.service.GameService;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,7 +39,6 @@ public class GameBean implements Serializable {
     
     @PostConstruct
     public void init() {
-        gameService.insertGames();
         listGames = gameService.listAll();
         ola = "xxxx";
     }

@@ -32,20 +32,18 @@ public class Console implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String AnoLancamento;
+    private Long anoLancamento;
     private String Fabricante;
-  
-    
     @OneToMany(mappedBy = "console", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
     private List<Game> jogos;
 
     public Console() {
     }
 
-    public Console(Long id, String nome, String AnoLancamento, String Fabricante) {
+    public Console(Long id, String nome, Long anoLancamento, String Fabricante) {
         this.id = id;
         this.nome = nome;      
-        this.AnoLancamento = AnoLancamento;
+        this.anoLancamento = anoLancamento;
         this.Fabricante = Fabricante;
     }
 

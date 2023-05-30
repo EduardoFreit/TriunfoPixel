@@ -2,16 +2,8 @@ package br.ifpe.triunfopixel.tests;
 
 import br.ifpe.triunfopixel.service.GameService;
 import br.ifpe.triunfopixel.service.UserService;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
@@ -20,6 +12,11 @@ public class Teste {
     protected static GameService gameService;
     protected static UserService userService;
     protected static Logger logger;
+    
+    @Before
+    public void insertDB() {
+        DbUnitUtil.inserirDados();
+    }
 
     @BeforeClass
     public static void setUpClass() {
@@ -27,7 +24,6 @@ public class Teste {
         logger.setLevel(Level.INFO);
         gameService = new GameService();
         userService = new UserService();
-        DbUnitUtil.inserirDados();
     }
-
+    
 }

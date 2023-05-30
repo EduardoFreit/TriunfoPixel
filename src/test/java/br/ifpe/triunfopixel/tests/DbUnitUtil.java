@@ -1,49 +1,39 @@
 package br.ifpe.triunfopixel.tests;
 
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import org.dbunit.DatabaseUnitException;
-import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
+import java.sql.Statement;
 
-/**
- *
- * @author lepf9
- */
 public class DbUnitUtil {
-    private static final String XML_FILE = "/dbunit/dataset.xml";
+    private static final String URL = "jdbc:derby://localhost:1527/pdsc";
+    private static final String USER = "app";
+    private static final String PASSWORD = "app";
+    private static final String XML_FILE = "./dbunit/init.sql";
 
     public static void inserirDados() {
-        Connection conn = null;
-        IDatabaseConnection db_conn = null;
-        try {
-            conn = DriverManager.getConnection(
-                    "jdbc:derby://localhost:1527/pdsc", "app", "app");
-            db_conn = new DatabaseConnection(conn);
-            FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-            builder.setColumnSensing(true);
-            InputStream in = DbUnitUtil.class.getResourceAsStream(XML_FILE);
-            IDataSet dataSet = builder.build(in);
-            DatabaseOperation.CLEAN_INSERT.execute(db_conn, dataSet);
-        } catch (SQLException | DatabaseUnitException ex) {
-            throw new RuntimeException(ex.getMessage(), ex);
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD); 
+                Statement statement = conn.createStatement()) {
+            ClassLoader classLoader = DbUnitUtil.class.getClassLoader(); 
+            URL resource = classLoader.getResource(XML_FILE);
+            
+            try (BufferedReader reader = new BufferedReader(new FileReader(resource.getFile()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if(!(line.isBlank() || line.isEmpty())) {
+                        statement.execute(line.trim());
+                    }
                 }
-
-                if (db_conn != null) {
-                    db_conn.close();
-                }
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex.getMessage(), ex);
+                reader.close();
             }
-        }
+            conn.close();
+            statement.close();
+        } catch (IOException | SQLException ex) {
+            throw new RuntimeException(ex.getMessage(), ex);
+        } 
     }
 }

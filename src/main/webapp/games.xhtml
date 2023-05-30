@@ -35,9 +35,9 @@
                                 <h:outputText value="#{game.name}"/>
                             </p:column>
 
-                            <p:column headerText="Console" filterBy="#{game.console}" sortBy="#{game.console}"
+                            <p:column headerText="Console" filterBy="#{game.console.nome}" sortBy="#{game.console.nome}"
                                       filterMatchMode="contains">
-                                <h:outputText value="#{game.console}"/>
+                                <h:outputText value="#{game.console.nome}"/>
                             </p:column>
 
                             <p:column headerText="Genero" filterBy="#{game.genre}" sortBy="#{game.genre}"

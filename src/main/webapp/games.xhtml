@@ -9,35 +9,83 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form>
-            <div class="card">
-                <ui:composition template="/basicTemplate.xhtml">
-                    <ui:define name="title">Games</ui:define>
-                    <ui:define name="content">
-                        <h2>Jogos</h2>
-                        <p:dataList value="#{gameBean.listGames}" var="game" type="ordered" rows="5" paginator="true">
-                            <div class="game-list-item d-flex justify-content-between mb-3">
-                                <div class="game-list-detail d-flex">   
-                                    <p:graphicImage value="#{game.urlImagem}" width="150" height="150"/>
-                                    <div class="game-detail ms-2">
-                                        <div class="game-name fw-bold">#{game.name}</div>
-                                        <div class="game-console">#{game.console}</div>
-                                        <i class="pi pi-tag product-category-icon"/>
-                                        <span class="game-genre ms-1">#{game.genre}</span>
+        <div class="card">
+            <ui:composition template="/basicTemplate.xhtml">
+                <ui:define name="title">Games</ui:define>
+                <ui:define name="content">
+                    <h1>Jogos</h1>
+                    <div class="card">
+                        <p:dataTable id="tableGames" var="game" value="#{gameBean.listGames}"
+                                widgetVar="gamesTable" multiViewState="true" rows="5" paginator="true"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="5,10" rowKey="#{game.id}"
+                                emptyMessage="Nenhum Jogo Encontrado">
+                            
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Buscar: " class="me-2"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('gamesTable').filter()" class="w-150"
+                                                 placeholder="Digite alguma chave"/>
+                                </p:outputPanel>
+                            </f:facet>
+
+
+                            <p:column headerText="Name" filterBy="#{game.name}" sortBy="#{game.name}"
+                                      filterMatchMode="contains" sortOrder="ascending" >
+                                <h:outputText value="#{game.name}"/>
+                            </p:column>
+
+                            <p:column headerText="Console" filterBy="#{game.console}" sortBy="#{game.console}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{game.console}"/>
+                            </p:column>
+
+                            <p:column headerText="Genero" filterBy="#{game.genre}" sortBy="#{game.genre}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{game.genre}"/>
+                            </p:column>
+
+                            <p:column headerText="Ações" style="width:6rem;text-align: center;">
+                                <p:commandButton  oncomplete="PF('gameDialog').show()" update=":form:gameDetail" style="margin: 1px"
+                                                 icon="pi pi-search" title="View">
+                                    <f:setPropertyActionListener value="#{game}"
+                                                                 target="#{gameBean.selectedGame}"/>
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>
+                    </div>
+
+
+                    <p:dialog header="Info do Jogo" widgetVar="gameDialog" modal="true" showEffect="fade"
+                            hideEffect="fade" resizable="false">
+                        <p:outputPanel id="gameDetail" style="text-align:center;">
+                            <p:column rendered="#{not empty gameBean.selectedGame}">
+                                <div class="game">
+                                    <div class="game-list-item d-flex justify-content-between mb-3" style="width: 45vw">
+                                        <div class="game-list-detail d-flex">   
+                                            <p:graphicImage value="#{gameBean.selectedGame.urlImagem}" width="150" height="150"/>
+                                            <div class="game-detail ms-2" style="display: flex;flex-wrap: wrap;flex-direction: column; align-items: flex-start;">
+                                                <div class="game-name fw-bold">Nome: #{gameBean.selectedGame.name}</div>
+                                                <div class="game-console">Console: #{gameBean.selectedGame.console}</div>
+                                                <div class="game-genre">Gênero: #{gameBean.selectedGame.genre}</div>
+                                            </div>
+                                        </div>
+                                        <div class="game-list-action">
+                                            <p:commandButton disableOnAjax="false" action="#{gameBean.prepareDownload()}"            
+                                                    value="Baixar Room"
+                                                    icon="pi pi-cloud-download">
+                                                    <p:fileDownload value="#{gameBean.file}" />
+                                            </p:commandButton>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="game-list-action">
-                                    <p:commandButton                                
-                                            value="Baixar Room"
-                                            icon="pi pi-cloud-download">
-                                    </p:commandButton>
-                                </div>
-                            </div>
-                        </p:dataList>
-                    </ui:define>
-                </ui:composition>
-            </div>
-        </h:form>
+                            </p:column>
+                        </p:outputPanel>
+                    </p:dialog>
+                </ui:define>
+            </ui:composition>
+        </div>
     </h:body>
 </html>
 

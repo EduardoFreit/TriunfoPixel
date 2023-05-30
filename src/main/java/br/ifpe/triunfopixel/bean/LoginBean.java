@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package br.ifpe.triunfopixel.bean;
 
-import br.ifpe.triunfopixel.model.Game;
 import br.ifpe.triunfopixel.model.Usr;
-import br.ifpe.triunfopixel.service.GameService;
-import br.ifpe.triunfopixel.service.LoginService;
+import br.ifpe.triunfopixel.service.UserService;
 import br.ifpe.triunfopixel.util.Util;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -29,7 +23,7 @@ public class LoginBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Getter(AccessLevel.NONE)@Setter(AccessLevel.NONE)
-    private final LoginService loginService = new LoginService();
+    private final UserService userService = new UserService();
     private Usr user;
     private String email;
     private String password;
@@ -42,7 +36,7 @@ public class LoginBean implements Serializable {
     
     public String login() {
         String passwordMd5 = Util.md5(password);
-        Usr foundUser = loginService.login(email, passwordMd5);
+        Usr foundUser = userService.login(email, passwordMd5);
 
         if (foundUser == null) {
             String summary = "Falha ao realizar login";
@@ -57,14 +51,12 @@ public class LoginBean implements Serializable {
     }
     
     public void register() { 
-        Usr foundPerson = loginService.checkPersonWithEmail(user.getEmail()); 
+        Usr foundPerson = userService.checkPersonWithEmail(user.getEmail()); 
         if (foundPerson != null) { 
             String summary = "Já existe Usuário com este email"; 
             Util.getFacesContext().addMessage("sticky-register", new FacesMessage(FacesMessage.SEVERITY_WARN, summary, null));
         }  else {
-            String encryptPassword = Util.md5(user.getPassword()); 
-            user.setPassword(encryptPassword); 
-            loginService.insert(user); 
+            userService.insert(user); 
             String summary = "Usuário Criado com Sucesso."; 
             Util.getFacesContext().addMessage("sticky-register", new FacesMessage(summary));
             PrimeFaces.current().executeScript("PF('registrarDialog').hide()");

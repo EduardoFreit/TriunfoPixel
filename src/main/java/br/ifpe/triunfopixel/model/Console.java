@@ -5,11 +5,13 @@
 package br.ifpe.triunfopixel.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,16 +33,20 @@ public class Console implements Serializable {
     private String urlImagem;
     private String AnoLancamento;
     private String Fabricante;
+    
+    @OneToMany
+    private List<Game> jogos;
 
     public Console() {
     }
 
-    public Console(Long id, String nome, String urlImagem, String AnoLancamento, String Fabricante) {
+    public Console(Long id, String nome, String urlImagem, String AnoLancamento, String Fabricante, List<Game> jogos) {
         this.id = id;
         this.nome = nome;
         this.urlImagem = urlImagem;
         this.AnoLancamento = AnoLancamento;
         this.Fabricante = Fabricante;
+        this.jogos = jogos;
     }
 
     @Override

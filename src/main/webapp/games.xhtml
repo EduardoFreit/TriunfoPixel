@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Games</title>
     </h:head>
     <h:body>
         <div class="card">
@@ -67,8 +67,9 @@
                                             <p:graphicImage value="#{gameBean.selectedGame.urlImagem}" width="150" height="150"/>
                                             <div class="game-detail ms-2" style="display: flex;flex-wrap: wrap;flex-direction: column; align-items: flex-start;">
                                                 <div class="game-name fw-bold">Nome: #{gameBean.selectedGame.name}</div>
-                                                <div class="game-console">Console: #{gameBean.selectedGame.console}</div>
+                                                <div class="game-console">Console: #{gameBean.selectedGame.console.nome}</div>
                                                 <div class="game-genre">Gênero: #{gameBean.selectedGame.genre}</div>
+                                                <div class="game-hash">Hash: <i>#{gameBean.selectedGame.hash}</i></div>
                                             </div>
                                         </div>
                                         <div class="game-list-action">

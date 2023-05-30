@@ -1,5 +1,6 @@
 package br.ifpe.triunfopixel.tests;
 
+import br.ifpe.triunfopixel.service.ConsoleService;
 import br.ifpe.triunfopixel.service.GameService;
 import br.ifpe.triunfopixel.service.UserService;
 import java.util.logging.Level;
@@ -11,6 +12,7 @@ public class Teste {
 
     protected static GameService gameService;
     protected static UserService userService;
+    protected static ConsoleService consoleService;
     protected static Logger logger;
     
     @Before
@@ -24,6 +26,7 @@ public class Teste {
         logger.setLevel(Level.INFO);
         gameService = new GameService();
         userService = new UserService();
+        consoleService = new ConsoleService();
     }
     
 }

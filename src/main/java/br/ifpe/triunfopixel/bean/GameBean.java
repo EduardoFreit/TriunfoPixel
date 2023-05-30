@@ -29,7 +29,6 @@ public class GameBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
 
-    private String ola = "olaaa";
     private List<Game> listGames = new ArrayList<>();
     private Game selectedGame = new Game();
     private StreamedContent file;
@@ -40,7 +39,6 @@ public class GameBean implements Serializable {
     @PostConstruct
     public void init() {
         listGames = gameService.listAll();
-        ola = "xxxx";
     }
     
     public void prepareDownload() {

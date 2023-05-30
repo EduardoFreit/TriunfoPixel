@@ -23,6 +23,7 @@ public class Game implements Serializable {
     private String urlImagem;
     private String urlRoom;
     private String genre;
+    private String hash;
     
     @ManyToOne
     @JoinColumn(name = "CONSOLE_ID")

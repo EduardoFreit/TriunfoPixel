@@ -12,7 +12,6 @@ import org.junit.Before;
     public void beforeTest(){
 
     }
-     
     
     @Test
     public void findConsole() {

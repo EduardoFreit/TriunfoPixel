@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @SessionScoped
 @ManagedBean
@@ -43,6 +44,15 @@ public class ConsoleBean implements Serializable {
     }
     
     public void prepareDownload() {
-    }  
+    }
+    
+    public void prepareDownloadGame(String url) {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().redirect(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    } 
     
 }

@@ -24,7 +24,7 @@
                             <f:facet name="header">
                                 <p:outputPanel>
                                     <h:outputText value="Buscar: " class="me-2"/>
-                                    <p:inputText id="globalFilter" onkeyup="PF('gamesTable').filter()" class="w-150"
+                                    <p:inputText id="globalFilter" onkeyup="PF('consoleTable').filter()" class="w-150"
                                                  placeholder="Digite alguma chave"/>
                                 </p:outputPanel>
                             </f:facet>
@@ -85,6 +85,13 @@
                                             <p:column headerText="Gênero" filterBy="#{game.genre}" sortBy="#{game.genre}"
                                                       filterMatchMode="contains">
                                                 <h:outputText value="#{game.genre}"/>
+                                            </p:column>
+                                            <p:column headerText="Ações" style="width:6rem;text-align: center;">
+                                                <p:commandButton disableOnAjax="false" 
+                                                        action="#{consoleBean.prepareDownloadGame(game.urlRoom)}"     
+                                                        title="Download Jogo"
+                                                        icon="pi pi-cloud-download">
+                                                </p:commandButton>
                                             </p:column>
 
                                         </p:dataTable>

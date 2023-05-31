@@ -3,6 +3,7 @@ package br.ifpe.triunfopixel.bean;
 import br.ifpe.triunfopixel.model.Game;
 import br.ifpe.triunfopixel.service.ConsoleService;
 import br.ifpe.triunfopixel.service.GameService;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -43,7 +44,7 @@ public class GameBean implements Serializable {
     
     public void prepareDownload() {
         try {
-            URL url = new URL("https://server.emulatorgames.net/roms/sega-master-system/Aladdin%20(Europe).zip");
+            URL url = new URL(this.selectedGame.getUrlRoom());
             InputStream inputStream = url.openStream();
             Path tempFile = Files.createTempFile("download", ".zip");
             Files.copy(inputStream, tempFile, StandardCopyOption.REPLACE_EXISTING);
@@ -59,8 +60,22 @@ public class GameBean implements Serializable {
                     }
                 })
                 .build();
+            /*InputStream inputStream = this.getClass().getResourceAsStream("/consoles/SNES/roms/Chrono Trigger.zip");
+            file = DefaultStreamedContent.builder()
+                .name( this.selectedGame.getName() + ".zip")
+                .contentType("application/zip")
+                .stream(() -> {
+                    try {
+                        return inputStream;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                })
+                .build();*/
             
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }   
     

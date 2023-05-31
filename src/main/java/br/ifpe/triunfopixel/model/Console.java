@@ -33,18 +33,19 @@ public class Console implements Serializable {
     private Long id;
     private String nome;
     private Long anoLancamento;
-    private String Fabricante;
+    private String fabricante;
+    private String urlImagem;
     @OneToMany(mappedBy = "console", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
     private List<Game> jogos;
 
     public Console() {
     }
 
-    public Console(Long id, String nome, Long anoLancamento, String Fabricante) {
+    public Console(Long id, String nome, Long anoLancamento, String fabricante) {
         this.id = id;
         this.nome = nome;      
         this.anoLancamento = anoLancamento;
-        this.Fabricante = Fabricante;
+        this.fabricante = fabricante;
     }
 
     @Override

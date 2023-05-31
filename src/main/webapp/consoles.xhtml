@@ -14,6 +14,112 @@
                 <ui:define name="title">Consoles</ui:define>
                 <ui:define name="content">
                     <h1>Consoles</h1>
+                    <div class="card">
+                        <p:dataTable id="tableConsoles" var="console" value="#{consoleBean.listConsoles}"
+                                widgetVar="consoleTable" multiViewState="true" rows="5" paginator="true"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="5,10" rowKey="#{console.id}"
+                                emptyMessage="Nenhum Console Encontrado">
+                            
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Buscar: " class="me-2"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('gamesTable').filter()" class="w-150"
+                                                 placeholder="Digite alguma chave"/>
+                                </p:outputPanel>
+                            </f:facet>
+                            
+                            <p:column headerText="Nome" filterBy="#{console.nome}" sortBy="#{console.nome}"
+                                      filterMatchMode="contains" sortOrder="ascending" >
+                                <h:outputText value="#{console.nome}"/>
+                            </p:column>
+
+                            <p:column headerText="Ano de Lançamento" filterBy="#{console.anoLancamento}" sortBy="#{console.anoLancamento}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{console.anoLancamento}"/>
+                            </p:column>
+
+                            <p:column headerText="Fabricante" filterBy="#{console.fabricante}" sortBy="#{console.fabricante}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{console.fabricante}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Ações" style="width:6rem;text-align: center;">
+                                <p:commandButton  oncomplete="PF('gamesDialog').show()" update=":form:gamesDetail" style="margin: 1px"
+                                                 icon="pi pi-list" title="Listar Jogos">
+                                    <f:setPropertyActionListener value="#{console}"
+                                                                 target="#{consoleBean.selectedConsole}"/>
+                                </p:commandButton>
+                                <p:commandButton  oncomplete="PF('consoleDialog').show()" update=":form:consoleDetail" style="margin: 1px"
+                                                 icon="pi pi-info-circle" title="Detalhe do Console">
+                                    <f:setPropertyActionListener value="#{console}"
+                                                                 target="#{consoleBean.selectedConsole}"/>
+                                </p:commandButton>
+                            </p:column>
+                            
+                        </p:dataTable>
+                    </div>
+                    
+                    <p:dialog header="Jogos do Console" widgetVar="gamesDialog" modal="true" showEffect="fade"
+                            hideEffect="fade" resizable="false">
+                        <p:outputPanel id="gamesDetail" style="text-align:center;">
+                            <p:column rendered="#{not empty consoleBean.selectedConsole}">
+                                <div class="games">
+                                    <div class="games-list-item d-flex justify-content-between mb-3" style="width: 45vw">
+                                        <p:dataTable id="tableGames" var="game" value="#{consoleBean.selectedConsole.jogos}"
+                                                widgetVar="gamesTable" multiViewState="true" rows="5" paginator="true"
+                                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                                rowsPerPageTemplate="5" rowKey="#{game.id}"
+                                                emptyMessage="Nenhum Jogo Encontrado">
+
+                                            <p:column headerText="Nome" filterBy="#{game.name}" sortBy="#{game.name}"
+                                                      filterMatchMode="contains" sortOrder="ascending" >
+                                                <h:outputText value="#{game.name}"/>
+                                            </p:column>
+
+                                            <p:column headerText="Console" filterBy="#{game.console.nome}" sortBy="#{game.console.nome}"
+                                                      filterMatchMode="contains">
+                                                <h:outputText value="#{game.console.nome}"/>
+                                            </p:column>
+
+                                            <p:column headerText="Gênero" filterBy="#{game.genre}" sortBy="#{game.genre}"
+                                                      filterMatchMode="contains">
+                                                <h:outputText value="#{game.genre}"/>
+                                            </p:column>
+
+                                        </p:dataTable>
+                                    </div>
+                                </div>
+                            </p:column>
+                        </p:outputPanel>
+                    </p:dialog>
+                    
+                    <p:dialog header="Info do Console" widgetVar="consoleDialog" modal="true" showEffect="fade"
+                            hideEffect="fade" resizable="false">
+                        <p:outputPanel id="consoleDetail" style="text-align:center;">
+                            <p:column rendered="#{not empty consoleBean.selectedConsole}">
+                                <div class="console">
+                                    <div class="console-list-item d-flex justify-content-between mb-3" style="width: 45vw">
+                                        <div class="console-list-detail d-flex">   
+                                            <p:graphicImage value="#{consoleBean.selectedConsole.urlImagem}" width="150" height="150"/>
+                                            <div class="console-detail ms-2" style="display: flex;flex-wrap: wrap;flex-direction: column; align-items: flex-start;">
+                                                <div class="console-nome fw-bold">Nome: #{consoleBean.selectedConsole.nome}</div>
+                                                <div class="console-ano-lancamento">Ano Lançamento: #{consoleBean.selectedConsole.anoLancamento}</div>
+                                                <div class="console-fabricante">Fabricante: #{consoleBean.selectedConsole.fabricante}</div>
+                                            </div>
+                                        </div>
+                                        <div class="game-list-action">
+                                            <p:commandButton disableOnAjax="false" action="#{consoleBean.prepareDownload()}"            
+                                                    value="Baixar Rom Pack"
+                                                    icon="pi pi-cloud-download">
+                                            </p:commandButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p:column>
+                        </p:outputPanel>
+                    </p:dialog>
+
                 </ui:define>
             </ui:composition>
         </div>

@@ -47,7 +47,7 @@
 
                             <p:column headerText="Ações" style="width:6rem;text-align: center;">
                                 <p:commandButton  oncomplete="PF('gameDialog').show()" update=":form:gameDetail" style="margin: 1px"
-                                                 icon="pi pi-search" title="View">
+                                                 icon="pi pi-info-circle" title="Detalhe do Console">
                                     <f:setPropertyActionListener value="#{game}"
                                                                  target="#{gameBean.selectedGame}"/>
                                 </p:commandButton>
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="game-list-action">
                                             <p:commandButton disableOnAjax="false" action="#{gameBean.prepareDownload()}"            
-                                                    value="Baixar Room"
+                                                    value="Baixar Rom"
                                                     icon="pi pi-cloud-download">
                                                     <p:fileDownload value="#{gameBean.file}" />
                                             </p:commandButton>

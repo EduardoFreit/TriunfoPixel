@@ -1,79 +1,71 @@
 package br.ifpe.triunfopixel.tests;
 
-import br.ifpe.triunfopixel.model.Game;
+import br.ifpe.triunfopixel.model.Console;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
  public class ConsoleTestes extends Teste {
      
-     @Test
-     public void teste(){
-         
-     }
+    @Before
+    public void beforeTest(){
+
+    }
      
-    /*
+    
     @Test
-    public void findGame() {
-        Game gameUpdate = gameService.findById(1L);
-        assertTrue(gameUpdate.getName().equals("Metal Slug Advance"));
-        //assertTrue(gameUpdate.getConsole().equals("Game Boy Advance"));
-        assertTrue(gameUpdate.getGenre().equals("Run and Gun"));
-        assertTrue(gameUpdate.getUrlImagem().equals("https://media.retroachievements.org/Images/069381.png"));
+    public void findConsole() {
+        Console consoleFind = consoleService.findById(2L);
+        assertTrue(consoleFind.getNome().equals("SNES"));
+        assertTrue(consoleFind.getFabricante().equals("Nintendo"));
+        assertTrue(consoleFind.getAnoLancamento().equals(1990L));
     }
      
      
     @Test
-    public void insertGame() {
-        List<Game> listGames = gameService.listAll();
-        assertTrue(listGames.size() == 20);
+    public void insertConsole() {
+        List<Console> listConsoles = consoleService.listAll();
+        assertTrue(listConsoles.size() == 4);
         
-        Game newGame = new Game();
-        //newGame.setConsole("PlayStation");
-        newGame.setName("Alien Trilogy");
-        newGame.setGenre("First-Person Shooter");
-        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
-        newGame.setUrlRoom("");
+        Console newConsole = new Console();
+        newConsole.setNome("PlayStation");
+        newConsole.setFabricante("Sony");
+        newConsole.setAnoLancamento(1994L);
         
-        gameService.insert(newGame);
+        consoleService.insert(newConsole);
         
-        listGames = gameService.listAll();
-        assertTrue(listGames.size() == 21);
+        listConsoles = consoleService.listAll();
+        assertTrue(listConsoles.size() == 5);
     }
     
     @Test
     public void updateGame() {
-        Game gameUpdate = gameService.findById(1L);
-        assertTrue(gameUpdate.getName().equals("Metal Slug Advance"));
-        assertTrue(gameUpdate.getConsole().equals("Game Boy Advance"));
-        assertTrue(gameUpdate.getGenre().equals("Run and Gun"));
-        assertTrue(gameUpdate.getUrlImagem().equals("https://media.retroachievements.org/Images/069381.png"));
+        Console consoleUpdate = consoleService.findById(1L);
+        assertTrue(consoleUpdate.getNome().equals("Game Boy Advance"));
+        assertTrue(consoleUpdate.getFabricante().equals("Nintendo"));
+        assertTrue(consoleUpdate.getAnoLancamento().equals(2001L));
       
-        gameUpdate.setName("Breath of Fire");
-        //gameUpdate.setConsole("Game Boy");
-        gameUpdate.setGenre("Role-Playing Game");
-        gameUpdate.setUrlImagem("https://media.retroachievements.org/Images/033806.png");
+        consoleUpdate.setNome("NES");
+        consoleUpdate.setAnoLancamento(1986L);
         
-        gameService.update(gameUpdate);
+        consoleService.update(consoleUpdate);
         
-        gameUpdate = gameService.findById(1L);
-        assertTrue(gameUpdate.getName().equals("Breath of Fire"));
-        assertTrue(gameUpdate.getConsole().equals("Game Boy"));
-        assertTrue(gameUpdate.getGenre().equals("Role-Playing Game"));
-        assertTrue(gameUpdate.getUrlImagem().equals("https://media.retroachievements.org/Images/033806.png"));
+        consoleUpdate = consoleService.findById(1L);
+        assertTrue(consoleUpdate.getNome().equals("NES"));
+        assertTrue(consoleUpdate.getAnoLancamento().equals(1986L));
     }
     
     @Test
-    public void removeGame() {
-        List<Game> listGames = gameService.listAll();
-        assertTrue(listGames.size() == 20);
+    public void removeConsole() {
+        List<Console> listConsoles = consoleService.listAll();
+        assertTrue(listConsoles.size() == 4);
         
-        Game gameDelete = gameService.findById(1L);
+        Console consoleDelete = consoleService.findById(1L);
+        consoleService.remove(consoleDelete);
         
-        gameService.remove(gameDelete);
-        
-        listGames = gameService.listAll();
-        assertTrue(listGames.size() == 19);
+        listConsoles = consoleService.listAll();
+        assertTrue(listConsoles.size() == 3);
     }
-*/
+
 }

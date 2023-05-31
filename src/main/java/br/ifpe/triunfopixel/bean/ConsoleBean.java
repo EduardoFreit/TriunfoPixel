@@ -42,4 +42,7 @@ public class ConsoleBean implements Serializable {
         listConsoles = consoleService.listAll();
     }
     
+    public void prepareDownload() {
+    }  
+    
 }

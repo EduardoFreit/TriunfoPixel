@@ -15,12 +15,9 @@ import javax.faces.bean.ManagedBean;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @SessionScoped
 @ManagedBean
@@ -44,37 +41,9 @@ public class GameBean implements Serializable {
     
     public void prepareDownload() {
         try {
-            URL url = new URL(this.selectedGame.getUrlRoom());
-            InputStream inputStream = url.openStream();
-            Path tempFile = Files.createTempFile("download", ".zip");
-            Files.copy(inputStream, tempFile, StandardCopyOption.REPLACE_EXISTING);
-            file = DefaultStreamedContent.builder()
-                .name( this.selectedGame.getName() + ".zip")
-                .contentType("application/zip")
-                .stream(() -> {
-                    try {
-                        return Files.newInputStream(tempFile);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return null;
-                    }
-                })
-                .build();
-            /*InputStream inputStream = this.getClass().getResourceAsStream("/consoles/SNES/roms/Chrono Trigger.zip");
-            file = DefaultStreamedContent.builder()
-                .name( this.selectedGame.getName() + ".zip")
-                .contentType("application/zip")
-                .stream(() -> {
-                    try {
-                        return inputStream;
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        return null;
-                    }
-                })
-                .build();*/
-            
-        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().redirect(this.selectedGame.getUrlRoom());
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }   

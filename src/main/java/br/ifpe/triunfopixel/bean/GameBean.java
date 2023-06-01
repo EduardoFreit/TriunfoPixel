@@ -1,13 +1,9 @@
 package br.ifpe.triunfopixel.bean;
 
 import br.ifpe.triunfopixel.model.Game;
-import br.ifpe.triunfopixel.service.ConsoleService;
 import br.ifpe.triunfopixel.service.GameService;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;

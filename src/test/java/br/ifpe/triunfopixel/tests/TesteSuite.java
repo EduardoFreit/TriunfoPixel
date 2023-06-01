@@ -5,9 +5,9 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    br.ifpe.triunfopixel.tests.GameTestes.class,
-    br.ifpe.triunfopixel.tests.LoginRegisterTestes.class,
-    br.ifpe.triunfopixel.tests.ConsoleTestes.class,
+    br.ifpe.triunfopixel.tests.game.GameTestes.class,
+    br.ifpe.triunfopixel.tests.user.LoginRegisterTestes.class,
+    br.ifpe.triunfopixel.tests.console.ConsoleTestes.class,
 })
 public class TesteSuite {
     

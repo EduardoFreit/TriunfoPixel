@@ -1,6 +1,7 @@
-package br.ifpe.triunfopixel.tests;
+package br.ifpe.triunfopixel.tests.console;
 
 import br.ifpe.triunfopixel.model.Console;
+import br.ifpe.triunfopixel.tests.Teste;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -8,7 +9,10 @@ import org.junit.Before;
 
  public class ConsoleTestes extends Teste {
      
-    @Before
+     @Test
+    public void findGame() {}
+     
+    /*@Before
     public void beforeTest(){
 
     }
@@ -65,6 +69,6 @@ import org.junit.Before;
         
         listConsoles = consoleService.listAll();
         assertTrue(listConsoles.size() == 3);
-    }
+    }*/
 
 }

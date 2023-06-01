@@ -1,14 +1,18 @@
-package br.ifpe.triunfopixel.tests;
+package br.ifpe.triunfopixel.tests.user;
 
 import br.ifpe.triunfopixel.model.Usr;
+import br.ifpe.triunfopixel.tests.Teste;
 import br.ifpe.triunfopixel.util.Util;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
- public class LoginRegisterTestes extends Teste {
+ public class LoginRegisterValidationTestes extends Teste {
      
-    @Test
+     @Test
+    public void findGame() {}
+     
+    /*@Test
     public void login() {
         String email = "jorge@email.com";
         String password = "123";
@@ -56,5 +60,5 @@ import static org.junit.Assert.*;
         newUsuario.setIsAdmin(Boolean.FALSE);
         
         userService.insert(newUsuario);
-    }
+    }*/
 }

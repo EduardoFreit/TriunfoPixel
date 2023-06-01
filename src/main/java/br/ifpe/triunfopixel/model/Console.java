@@ -8,12 +8,16 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,11 +35,27 @@ public class Console implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @NotNull(message = "O campo 'Nome' é obrigatório.")
+    @Size(min = 2, message = "O campo 'Nome' não pode ter menos de 2 caractéres.")
+    @Column(nullable = false)
     private String nome;
+    
+    @NotNull(message = "O campo 'Ano do Lancamento' é obrigatório.")
+    @Column(nullable = false)
     private Long anoLancamento;
+    
+    @NotNull(message = "O campo 'Fabricante' é obrigatório.")
+    @Size(min = 2, message = "O campo 'Fabricante' não pode ter menos de 2 caractéres.")
+    @Column(nullable = false)
     private String fabricante;
+    
+    @NotNull(message = "O campo 'UrlImagem' é obrigatório.")
+    @Size(min = 2, message = "O campo 'UrlImagem' não pode ter menos de 2 caractéres.")
+    @Column(nullable = false)
     private String urlImagem;
-    @OneToMany(mappedBy = "console", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    
+    @OneToMany(mappedBy = "console", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Game> jogos;
 
     public Console() {

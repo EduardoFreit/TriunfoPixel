@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,10 +22,22 @@ public class Usr implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
+    
+    @NotNull(message = "O campo 'email' é obrigatório.")
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "O campo 'email' deve ser um endereço de email válido.")
+    @Column(unique = true, nullable = false)
     private String email;
+    
+    @NotNull(message = "O campo 'Password' é obrigatório.")
+    @Column(nullable = false)
     private String password;
+    
+    @NotNull(message = "O campo 'Nome' é obrigatório.")
+    @Size(min = 2,message = "O campo 'Nome' não pode ter menos de 2 caractéres.")
+    @Column(nullable = false)
     private String name;
+    
+    @Column(nullable = false)
     private Boolean isAdmin = false;
 
     @Override

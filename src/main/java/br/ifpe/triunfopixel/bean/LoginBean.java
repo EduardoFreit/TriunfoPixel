@@ -35,37 +35,14 @@ public class LoginBean implements Serializable {
     }
     
     public String login() {
-        String passwordMd5 = Util.md5(password);
-        Usr foundUser = userService.login(email, passwordMd5);
-
-        if (foundUser == null) {
-            String summary = "Falha ao realizar login";
-            Util.getFacesContext().addMessage("sticky-key-login", new FacesMessage(summary));
-            return "login";
-        }
-        HttpSession session = (HttpSession) Util.getFacesContext()
-                .getExternalContext()
-                .getSession(true);
-        session.setAttribute("user", foundUser);
-        return "games.xhtml?faces-redirect=true";
+        return this.userService.login(email, password);
     }
     
     public void register() { 
-        Usr foundPerson = userService.checkPersonWithEmail(user.getEmail()); 
-        if (foundPerson != null) { 
-            String summary = "Já existe Usuário com este email"; 
-            Util.getFacesContext().addMessage("sticky-register", new FacesMessage(FacesMessage.SEVERITY_WARN, summary, null));
-        }  else {
-            userService.insert(user); 
-            String summary = "Usuário Criado com Sucesso."; 
-            Util.getFacesContext().addMessage("sticky-register", new FacesMessage(summary));
-            PrimeFaces.current().executeScript("PF('registrarDialog').hide()");
-        }
+        this.userService.register(user);
     }
     
     public String logout() {
-        HttpSession session = Util.getSession();
-        session.invalidate();
-        return "login?faces-redirect=true";
+        return this.userService.logout();
     }
 }

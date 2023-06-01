@@ -3,10 +3,15 @@ package br.ifpe.triunfopixel.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 public abstract class BaseJPA<T> {
     
     private final EntityManager em = DAO.getEntityManager();
+    //protected ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    //protected Validator validator = factory.getValidator();
     
     private final Class<T> cls;
     
@@ -52,8 +57,12 @@ public abstract class BaseJPA<T> {
         return instancia;
     }
     
-    public List<T> read(String query){
+    public List<T> read(String query) {
         List<T> returnedList = em.createQuery(query, cls).getResultList();
         return returnedList;
+    }
+    
+    public List<T> readQuery(CriteriaQuery<T> cq) {
+        return em.createQuery(cq).getResultList();
     }
 }

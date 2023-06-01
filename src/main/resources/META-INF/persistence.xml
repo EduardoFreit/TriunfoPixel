@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="TriunfoPixel_PU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>br.ifpe.triunfopixel.model.Game</class>
     <class>br.ifpe.triunfopixel.model.Usr</class>
     <class>br.br.ifpe.triunfopixel.model.Console</class>
@@ -11,9 +11,13 @@
         <property name="javax.persistence.jdbc.user" value="app"/>
         <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
         <property name="javax.persistence.jdbc.password" value="app"/>
+        <property name="javax.persistence.validation.mode" value="AUTO"/>
+        <property name="hibernate.show_sql" value="true"/>
         <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
         <property name="javax.persistence.sql-load-script-source" value="dbunit/init.sql"/>
-        <property name="eclipselink.logging.level" value="FINE"/>
+        
+        <property name="hibernate.format_sql" value="true"/>
+        <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
     </properties>
   </persistence-unit>
 </persistence>

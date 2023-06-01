@@ -5,6 +5,9 @@ import br.ifpe.triunfopixel.service.GameService;
 import br.ifpe.triunfopixel.service.UserService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
@@ -14,6 +17,7 @@ public class Teste {
     protected static UserService userService;
     protected static ConsoleService consoleService;
     protected static Logger logger;
+    protected Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
     
     @Before
     public void insertDB() {

@@ -1,15 +1,30 @@
-package br.ifpe.triunfopixel.tests;
+package br.ifpe.triunfopixel.tests.game;
 
 import br.ifpe.triunfopixel.model.Console;
 import br.ifpe.triunfopixel.model.Game;
-import java.util.List;
+import br.ifpe.triunfopixel.tests.Teste;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
 
- public class GameTestes extends Teste {
+ public class GameValidationTestes extends Teste {
      
-    private Console console1;
+     
+    @Test
+    public void findGame() {
+        Game newGame = new Game();
+        newGame.setConsole(null);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlRoom("");
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(2, constraintViolations.size());
+    }
+    
+    /*private Console console1;
     private Console console2;
      
     @Before
@@ -78,5 +93,5 @@ import org.junit.Before;
         
         listGames = gameService.listAll();
         assertTrue(listGames.size() == 19);
-    }
+    }*/
 }

@@ -75,8 +75,7 @@ public class UserService implements Serializable, IBaseService<Usr> {
             String summary = "Já existe Usuário com este email"; 
             Util.getFacesContext().addMessage("sticky-register", new FacesMessage(FacesMessage.SEVERITY_WARN, summary, null));
         }  else {
-            user.setEmail(null);
-            userRepository.insert(user); 
+            userRepository.insertUser(user);
             String summary = "Usuário Criado com Sucesso."; 
             Util.getFacesContext().addMessage("sticky-register", new FacesMessage(summary));
             PrimeFaces.current().executeScript("PF('registrarDialog').hide()");

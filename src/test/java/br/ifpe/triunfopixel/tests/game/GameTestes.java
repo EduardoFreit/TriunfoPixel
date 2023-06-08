@@ -19,9 +19,10 @@ import static org.junit.Assert.*;
         newGame.setGenre("First-Person Shooter");
         newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
         newGame.setUrlRoom("");
-        
+        newGame.setHash("");
+
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
-        assertEquals(2, constraintViolations.size());
+        assertEquals(3, constraintViolations.size());
     }
     
     /*private Console console1;

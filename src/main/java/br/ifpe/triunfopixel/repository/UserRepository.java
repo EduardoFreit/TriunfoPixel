@@ -5,6 +5,7 @@ import static br.ifpe.triunfopixel.dao.DAO.getEntityManager;
 import br.ifpe.triunfopixel.model.Usr;
 import br.ifpe.triunfopixel.util.Util;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -23,7 +24,11 @@ public class UserRepository extends BaseJPA<Usr> implements Serializable {
         Root<Usr> from = cq.from(Usr.class);
         cq.where(cb.and(cb.equal(from.get("email"), email),
                 cb.equal(from.get("password"), password)));
-        return this.readQuery(cq).get(0);
+        List<Usr> usuarios = this.readQuery(cq);
+        if (usuarios.isEmpty()) {
+            return null;
+        }
+        return usuarios.get(0);
     }
     
     public Usr checkPersonWithEmail(String email) {
@@ -31,14 +36,16 @@ public class UserRepository extends BaseJPA<Usr> implements Serializable {
         CriteriaQuery<Usr> cq = cb.createQuery(Usr.class);
         Root<Usr> from = cq.from(Usr.class);
         cq.where(cb.equal(from.get("email"), email));
-        return this.readQuery(cq).get(0);
+        List<Usr> usuarios = this.readQuery(cq);
+        if (usuarios.isEmpty()) {
+            return null;
+        }
+        return usuarios.get(0);
     }
 
-    @Override
-    public void insert(Usr user) {
+    public void insertUser(Usr user) {
         String encryptPassword = Util.md5(user.getPassword()); 
         user.setPassword(encryptPassword); 
         this.insert(user);
     }
-      
 }

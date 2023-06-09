@@ -5,93 +5,133 @@ import br.ifpe.triunfopixel.model.Game;
 import br.ifpe.triunfopixel.tests.Teste;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
  public class GameValidationTestes extends Teste {
      
+    private Console console1;
+    private String string260;
+     
+    @Before
+    public void beforeTest() {
+        string260 = RandomStringUtils.randomAlphanumeric(260);
+        this.console1 = consoleService.findById(1L);
+    }
+     
      
     @Test
-    public void findGame() {
+    public void gameSemConsole() {
         Game newGame = new Game();
         newGame.setConsole(null);
         newGame.setName("Alien Trilogy");
         newGame.setGenre("First-Person Shooter");
         newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
-        newGame.setUrlRoom("");
+        newGame.setUrlRoom("testes");
+        newGame.setHash("testes");
         
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
-        assertEquals(2, constraintViolations.size());
+        assertEquals(1, constraintViolations.size());
     }
     
-    /*private Console console1;
-    private Console console2;
-     
-    @Before
-    public void beforeTest() {
-        this.console1 = consoleService.findById(1L);
-        this.console2 = consoleService.findById(2L);
-    }
-     
     @Test
-    public void findGame() {
-        Game gameFind = gameService.findById(1L);
-        assertTrue(gameFind.getName().equals("Metal Slug Advance"));
-        assertTrue(gameFind.getConsole().equals(console1));
-        assertTrue(gameFind.getGenre().equals("Run and Gun"));
-        assertTrue(gameFind.getUrlImagem().equals("https://media.retroachievements.org/Images/069381.png"));
-    }
-     
-    @Test
-    public void insertGame() {
-        List<Game> listGames = gameService.listAll();
-        assertTrue(listGames.size() == 20);
+    public void gameSemNome() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlRoom("testes");
+        newGame.setHash("testes");
         
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameSemGenero() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("");
+        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlRoom("testes");
+        newGame.setHash("testes");
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameSemUrlImage() {
         Game newGame = new Game();
         newGame.setConsole(console1);
         newGame.setName("Alien Trilogy");
         newGame.setGenre("First-Person Shooter");
-        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlImagem("");
+        newGame.setUrlRoom("testes");
+        newGame.setHash("testes");
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameSemUrlRom() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("testes");
         newGame.setUrlRoom("");
+        newGame.setHash("testes");
         
-        gameService.insert(newGame);
-        
-        listGames = gameService.listAll();
-        assertTrue(listGames.size() == 21);
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(1, constraintViolations.size());
     }
     
     @Test
-    public void updateGame() {
-        Game gameUpdate = gameService.findById(1L);
-        assertTrue(gameUpdate.getName().equals("Metal Slug Advance"));
-        assertTrue(gameUpdate.getConsole().equals(console1));
-        assertTrue(gameUpdate.getGenre().equals("Run and Gun"));
-        assertTrue(gameUpdate.getUrlImagem().equals("https://media.retroachievements.org/Images/069381.png"));
-      
-        gameUpdate.setName("Breath of Fire");
-        gameUpdate.setConsole(console2);
-        gameUpdate.setGenre("Role-Playing Game");
-        gameUpdate.setUrlImagem("https://media.retroachievements.org/Images/033806.png");
+    public void gameSemHash() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("testes");
+        newGame.setUrlRoom("");
+        newGame.setHash("testes");
         
-        gameService.update(gameUpdate);
-        
-        gameUpdate = gameService.findById(1L);
-        assertTrue(gameUpdate.getName().equals("Breath of Fire"));
-        assertTrue(gameUpdate.getConsole().equals(console2));
-        assertTrue(gameUpdate.getGenre().equals("Role-Playing Game"));
-        assertTrue(gameUpdate.getUrlImagem().equals("https://media.retroachievements.org/Images/033806.png"));
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(1, constraintViolations.size());
     }
     
     @Test
-    public void removeGame() {
-        List<Game> listGames = gameService.listAll();
-        assertTrue(listGames.size() == 20);
+    public void gameCamposMenosDoisCaracteres() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("A");
+        newGame.setGenre("F");
+        newGame.setUrlImagem("t");
+        newGame.setUrlRoom("g");
+        newGame.setHash("t");
         
-        Game gameDelete = gameService.findById(1L);
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(5, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameCamposMais255Caracteres() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName(string260);
+        newGame.setGenre(string260);
+        newGame.setUrlImagem(string260);
+        newGame.setUrlRoom(string260);
+        newGame.setHash(string260);
         
-        gameService.remove(gameDelete);
-        
-        listGames = gameService.listAll();
-        assertTrue(listGames.size() == 19);
-    }*/
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(5, constraintViolations.size());
+    }
+    
 }

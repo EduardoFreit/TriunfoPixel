@@ -37,7 +37,7 @@ public class Console implements Serializable {
     private Long id;
     
     @NotNull(message = "O campo 'Nome' é obrigatório.")
-    @Size(min = 2, message = "O campo 'Nome' não pode ter menos de 2 caractéres.")
+    @Size(min = 2, max = 255, message = "O campo 'Nome' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Column(nullable = false)
     private String nome;
     
@@ -46,12 +46,12 @@ public class Console implements Serializable {
     private Long anoLancamento;
     
     @NotNull(message = "O campo 'Fabricante' é obrigatório.")
-    @Size(min = 2, message = "O campo 'Fabricante' não pode ter menos de 2 caractéres.")
+    @Size(min = 2, max = 255, message = "O campo 'Fabricante' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Column(nullable = false)
     private String fabricante;
     
     @NotNull(message = "O campo 'UrlImagem' é obrigatório.")
-    @Size(min = 2, message = "O campo 'UrlImagem' não pode ter menos de 2 caractéres.")
+    @Size(min = 2, max = 255, message = "O campo 'UrlImagem' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Column(nullable = false)
     private String urlImagem;
     

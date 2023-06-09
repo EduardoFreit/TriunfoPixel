@@ -24,6 +24,7 @@ public class Usr implements Serializable {
     private Long id;
     
     @NotNull(message = "O campo 'email' é obrigatório.")
+    @Size(min = 2, max = 255, message = "O campo 'Email' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "O campo 'email' deve ser um endereço de email válido.")
     @Column(unique = true, nullable = false)
     private String email;
@@ -33,7 +34,7 @@ public class Usr implements Serializable {
     private String password;
     
     @NotNull(message = "O campo 'Nome' é obrigatório.")
-    @Size(min = 2,message = "O campo 'Nome' não pode ter menos de 2 caractéres.")
+    @Size(min = 2, max = 255, message = "O campo 'Nome' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Column(nullable = false)
     private String name;
     

@@ -25,27 +25,27 @@ public class Game implements Serializable {
     private Long id;
     
     @NotNull(message = "O campo 'Nome' é obrigatório.")
-    @Size(min = 2, message = "O campo 'Nome' não pode ter menos de 2 caractéres.")
+    @Size(min = 2, max = 255, message = "O campo 'Nome' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Column(nullable = false)
     private String name;
     
     @NotNull(message = "O campo 'UrlImagem' é obrigatório.")
-    @Size(min = 2,message = "O campo 'UrlImagem' não pode ter menos de 2 caractéres.")
+    @Size(min = 2, max = 255, message = "O campo 'UrlImagem' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Column(nullable = false)
     private String urlImagem;
     
     @NotNull(message = "O campo 'UrlRoom' é obrigatório.")
-    @Size(min = 2,message = "O campo 'UrlRoom' não pode ter menos de 2 caractéres.")
+    @Size(min = 2, max = 255, message = "O campo 'UrlRoom' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Column(nullable = false)
     private String urlRoom;
     
     @NotNull(message = "O campo 'Gênero' é obrigatório.")
-    @Size(min = 2,message = "O campo 'Gênero' não pode ter menos de 2 caractéres.")
+    @Size(min = 2, max = 255, message = "O campo 'Gênero' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Column(nullable = false)
     private String genre;
     
     @NotNull(message = "O campo 'Hash' é obrigatório.")
-    @Size(min = 2,message = "O campo 'Hash' não pode ter menos de 2 caractéres.")
+    @Size(min = 2, max = 255, message = "O campo 'Hash' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Column(nullable = false)
     private String hash;
     

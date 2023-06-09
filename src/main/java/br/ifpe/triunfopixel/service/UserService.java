@@ -53,20 +53,9 @@ public class UserService implements Serializable, IBaseService<Usr> {
         return userRepository.read(query);
     }
     
-    public String login(String email, String password) {
+    public Usr login(String email, String password) {
         String passwordMd5 = Util.md5(password);
-        Usr foundUser = userRepository.login(email, passwordMd5);
-
-        if (foundUser == null) {
-            String summary = "Falha ao realizar login";
-            Util.getFacesContext().addMessage("sticky-key-login", new FacesMessage(summary));
-            return "login";
-        }
-        HttpSession session = (HttpSession) Util.getFacesContext()
-                .getExternalContext()
-                .getSession(true);
-        session.setAttribute("user", foundUser);
-        return "games.xhtml?faces-redirect=true";
+        return userRepository.login(email, passwordMd5);
     }
     
     public void register(Usr user) { 

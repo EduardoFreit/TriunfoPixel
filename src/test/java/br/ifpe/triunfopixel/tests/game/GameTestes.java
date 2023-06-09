@@ -3,29 +3,13 @@ package br.ifpe.triunfopixel.tests.game;
 import br.ifpe.triunfopixel.model.Console;
 import br.ifpe.triunfopixel.model.Game;
 import br.ifpe.triunfopixel.tests.Teste;
-import java.util.Set;
-import javax.validation.ConstraintViolation;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
  public class GameTestes extends Teste {
-     
-     
-    @Test
-    public void findGame() {
-        Game newGame = new Game();
-        newGame.setConsole(null);
-        newGame.setName("Alien Trilogy");
-        newGame.setGenre("First-Person Shooter");
-        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
-        newGame.setUrlRoom("");
-        newGame.setHash("");
-
-        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
-        assertEquals(3, constraintViolations.size());
-    }
-    
-    /*private Console console1;
+    private Console console1;
     private Console console2;
      
     @Before
@@ -53,7 +37,8 @@ import static org.junit.Assert.*;
         newGame.setName("Alien Trilogy");
         newGame.setGenre("First-Person Shooter");
         newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
-        newGame.setUrlRoom("");
+        newGame.setUrlRoom("https://media.retroachievements.org/Images/054485.png");
+        newGame.setHash("Pasjm124HXS");
         
         gameService.insert(newGame);
         
@@ -94,5 +79,5 @@ import static org.junit.Assert.*;
         
         listGames = gameService.listAll();
         assertTrue(listGames.size() == 19);
-    }*/
+    }
 }

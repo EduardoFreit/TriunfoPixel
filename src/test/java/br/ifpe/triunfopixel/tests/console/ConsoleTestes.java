@@ -12,7 +12,7 @@ import org.junit.Before;
      @Test
     public void findGame() {}
      
-    /*@Before
+    @Before
     public void beforeTest(){
 
     }
@@ -35,6 +35,7 @@ import org.junit.Before;
         newConsole.setNome("PlayStation");
         newConsole.setFabricante("Sony");
         newConsole.setAnoLancamento(1994L);
+        newConsole.setUrlImagem("Teste");
         
         consoleService.insert(newConsole);
         
@@ -69,6 +70,6 @@ import org.junit.Before;
         
         listConsoles = consoleService.listAll();
         assertTrue(listConsoles.size() == 3);
-    }*/
+    }
 
 }

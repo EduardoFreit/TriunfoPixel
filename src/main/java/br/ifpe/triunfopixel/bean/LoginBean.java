@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
+import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -52,7 +53,18 @@ public class LoginBean implements Serializable {
     }
     
     public String login() {
-        return this.userService.login(email, password);
+        Usr user = this.userService.login(email, password);
+       
+        if (user == null) {
+            String summary = "Falha ao realizar login";
+            Util.getFacesContext().addMessage("sticky-key-login", new FacesMessage(summary));
+            return "login";
+        }
+        HttpSession session = (HttpSession) Util.getFacesContext()
+                .getExternalContext()
+                .getSession(true);
+        session.setAttribute("user", user);
+        return "games.xhtml?faces-redirect=true";
     }
     
     public void limparCampos() {

@@ -3,9 +3,6 @@ package br.ifpe.triunfopixel.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
 public abstract class BaseJPA<T> {
     

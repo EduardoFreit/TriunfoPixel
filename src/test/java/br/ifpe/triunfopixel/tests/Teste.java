@@ -31,6 +31,7 @@ public class Teste {
         gameService = new GameService();
         userService = new UserService();
         consoleService = new ConsoleService();
+        DbUnitUtil.inserirDados();
     }
     
 }

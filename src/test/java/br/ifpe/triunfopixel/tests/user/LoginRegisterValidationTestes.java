@@ -2,63 +2,62 @@ package br.ifpe.triunfopixel.tests.user;
 
 import br.ifpe.triunfopixel.model.Usr;
 import br.ifpe.triunfopixel.tests.Teste;
-import br.ifpe.triunfopixel.util.Util;
-import java.util.List;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
  public class LoginRegisterValidationTestes extends Teste {
      
-     @Test
-    public void findGame() {}
-     
-    /*@Test
-    public void login() {
-        String email = "jorge@email.com";
-        String password = "123";
-        Usr usuario = userService.login(email, Util.md5(password));
+    @Test
+    public void usuarioSemNome() {
+        Usr newUsuario = new Usr();
+        newUsuario.setEmail("luiz@email.com");
+        newUsuario.setPassword("123");
         
-        assertTrue(usuario.getName().equals("jorge"));
-        assertTrue(usuario.getEmail().equals("jorge@email.com"));
+        Set<ConstraintViolation<Usr>> constraintViolations = validator.validate(newUsuario);
+        assertEquals(1, constraintViolations.size());
     }
     
     @Test
-    public void loginError() {
-        String email = "jorge@email.com";
-        String password = "12345";
-        Usr usuario = userService.login(email, Util.md5(password));
-        assertNull(usuario);
-    }
-     
-    @Test
-    public void registerSucess() {
-        List<Usr> listUsers = userService.listAll();
-        assertTrue(listUsers.size() == 2);
-        
+    public void usuarioNomePequeno() {
         Usr newUsuario = new Usr();
-        newUsuario.setName("luiz");
+        newUsuario.setName("l");
         newUsuario.setPassword("123");
         newUsuario.setEmail("luiz@email.com");
-        newUsuario.setIsAdmin(Boolean.FALSE);
         
-        userService.insert(newUsuario);
-        
-        listUsers = userService.listAll();
-        
-        assertTrue(listUsers.size() == 3);
+        Set<ConstraintViolation<Usr>> constraintViolations = validator.validate(newUsuario);
+        assertEquals(1, constraintViolations.size());
     }
     
-    @Test(expected = Throwable.class)
-    public void registerError() {
-        List<Usr> listUsers = userService.listAll();
-        assertTrue(listUsers.size() == 2);
-        
+    @Test
+    public void usuarioSemEmail() {
         Usr newUsuario = new Usr();
         newUsuario.setName("luiz");
         newUsuario.setPassword("123");
-        newUsuario.setEmail("jorge@email.com");
-        newUsuario.setIsAdmin(Boolean.FALSE);
         
-        userService.insert(newUsuario);
-    }*/
+        Set<ConstraintViolation<Usr>> constraintViolations = validator.validate(newUsuario);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void usuarioSemSenha() {
+        Usr newUsuario = new Usr();
+        newUsuario.setName("luiz");
+        newUsuario.setEmail("luiz@email.com");
+        
+        Set<ConstraintViolation<Usr>> constraintViolations = validator.validate(newUsuario);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void usuarioEmailInvalido() {
+        Usr newUsuario = new Usr();
+        newUsuario.setName("luiz");
+        newUsuario.setPassword("123");
+        newUsuario.setEmail("luiz.com");
+        
+        Set<ConstraintViolation<Usr>> constraintViolations = validator.validate(newUsuario);
+        assertEquals(1, constraintViolations.size());
+    }
 }

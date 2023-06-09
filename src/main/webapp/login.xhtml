@@ -17,22 +17,27 @@
                 overflow: hidden;
             }
 	</style>
+        <script>
+    setTimeout(function() {
+      PF('growlWidgetVar').hide();
+    }, 5000);
+  </script>
     </h:head>
 
     <h:body class="h-100">
         
         <div class="d-flex align-items-center justify-content-center h-100 pb-5">
             <h:form class="ui-fluid formgrid grid m-3">
-               <p:growl id="growl" sticky="true" showDetail="false" life="2000" />  
+               <p:growl id="growl" showDetail="false" life="5000" />  
                 
                 <h5 class="m-1">Login</h5>
                 <div class="field col">
                     <h:outputLabel for="email" styleClass="col-fixed" style="width:100px" value="Email*"/>
-                    <p:inputText id="email"  value="#{loginBean.email}" label="Email" required="true"  maxlength="250" />
+                    <p:inputText id="email"  value="#{loginBean.email}" label="Email" />
                 </div>
                 <div class="field col">
                     <h:outputLabel for="password" styleClass="col-fixed" style="width:100px" value="Senha*"/>
-                    <p:password id="password" value="#{loginBean.password}" label="Senha" required="true" maxlength="250"/>
+                    <p:password id="password" value="#{loginBean.password}" label="Senha"/>
                 </div>
                 <div class="field col d-flex mt-3">
                     <p:commandButton type="button" value="Cadastrar" onclick="PF('registrarDialog').show()" styleClass="ui-button-outlined" />
@@ -45,30 +50,30 @@
         <p:dialog header="Cadastrar" widgetVar="registrarDialog" minHeight="40" width="400" showEffect="fade" modal="true" visible="">
             <div class="d-flex align-items-center justify-content-center">
                 <h:form>
-                    <p:growl id="growl" sticky="true" showDetail="false" life="2000"  />
+                    <p:growl id="growl" showDetail="false" life="5000"  />
                     <div class="ui-fluid formgrid grid">
                         <div class="field grid">
                             <h:outputLabel for="nome" styleClass="col-fixed" style="width:350px" value="Nome" />
                             <div class="col">
-                                <p:inputText id="nome" value="#{loginBean.user.name}" label="Nome" required="true" maxlength="250" />
+                                <p:inputText id="nome" value="#{loginBean.cadName}" label="Nome" />
                             </div>
                         </div>
                         <div class="field grid">
                             <h:outputLabel for="email" styleClass="col-fixed" style="width:350px" value="Email" />
                             <div class="col">
-                                <p:inputText  id="email" value="#{loginBean.user.email}" label="Email" required="true" maxlength="250" />
+                                <p:inputText  id="email" value="#{loginBean.cadEmail}" label="Email" />
                             </div>
                         </div>
                         <div class="field grid">
                             <h:outputLabel for="pwd1" styleClass="col-fixed" style="width:350px" value="Senha"/>
                             <div class="col">
-                                <p:password  id="pwd1" value="#{loginBean.user.password}" match="pwd2" label="Senha" required="true" maxlength="250" feedback="true" inline="true"/>
+                                <p:password  id="pwd1" value="#{loginBean.cadPassword}" label="Senha" inline="true" styleClass="#{loginBean.validationPasswordNoMatch ? 'ui-state-error' : ''}"/>
                             </div>
                         </div>
                         <div class="field grid">
                             <h:outputLabel for="pwd2" styleClass="col-fixed" style="width:350px" value="Confirmar Senha"/>
                             <div class="col">
-                                <p:password id="pwd2" value="#{loginBean.user.password}" label="Confirmar Senha" required="true" maxlength="250" />
+                                <p:password id="pwd2" value="#{loginBean.cadPasswordConfirm}" label="Confirmar Senha" styleClass="#{loginBean.validationPasswordNoMatch ? 'ui-state-error' : ''}"/>
                             </div>
                         </div>
                         <div class="field col d-flex mt-3">

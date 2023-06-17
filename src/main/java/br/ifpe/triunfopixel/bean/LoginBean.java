@@ -7,7 +7,6 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotEmpty;

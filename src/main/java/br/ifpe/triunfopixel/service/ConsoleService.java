@@ -2,6 +2,7 @@ package br.ifpe.triunfopixel.service;
 
 import br.ifpe.triunfopixel.model.Console;
 import br.ifpe.triunfopixel.repository.ConsoleRepository;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 
@@ -47,6 +48,15 @@ public class ConsoleService implements Serializable, IBaseService<Console> {
     @Override
     public List<Console> read(String query) {
         return consoleRepository.read(query);
+    }
+    
+    public InputStream getPackRomFile(Console selectedConsole) throws Exception {
+        if(selectedConsole == null) {
+            throw new Exception();
+        }
+        String fileName = selectedConsole.getNome() + ".zip";
+        String pathRom ="consoles\\" + fileName;
+        return getClass().getClassLoader().getResourceAsStream(pathRom);
     }
     
 }

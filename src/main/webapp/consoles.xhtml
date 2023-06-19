@@ -54,9 +54,7 @@
                                                                  target="#{consoleBean.selectedConsole}"/>
                                 </p:commandButton>
                                 <p:commandButton  oncomplete="PF('consoleDialog').show()" update=":form:consoleDetail" style="margin: 1px"
-                                                 icon="pi pi-info-circle" title="Detalhe do Console">
-                                    <f:setPropertyActionListener value="#{console}"
-                                                                 target="#{consoleBean.selectedConsole}"/>
+                                                 icon="pi pi-info-circle" title="Detalhe do Console" action="#{consoleBean.prepareDownloadRomPack(console)}">
                                 </p:commandButton>                                                      
                                 
                                 <p:commandButton  oncomplete="" update="" style="margin: 1px"
@@ -126,9 +124,10 @@
                                             </div>
                                         </div>
                                         <div class="game-list-action">
-                                            <p:commandButton disableOnAjax="false" action="#{consoleBean.prepareDownload()}"            
+                                            <p:commandButton disableOnAjax="false"            
                                                     value="Baixar Rom Pack"
                                                     icon="pi pi-cloud-download">
+                                                <p:fileDownload value="#{consoleBean.file}"/>
                                             </p:commandButton>
                                         </div>
                                     </div>

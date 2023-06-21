@@ -15,8 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,6 +52,8 @@ public class Console implements Serializable {
     
     @NotNull(message = "O campo 'UrlImagem' é obrigatório.")
     @Size(min = 2, max = 255, message = "O campo 'UrlImagem' não pode ter menos de 2 ou mais de 255 caractéres.")
+    @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
+        message = "Insira uma URL Válida para o campo 'UrlImagem")
     @Column(nullable = false)
     private String urlImagem;
     

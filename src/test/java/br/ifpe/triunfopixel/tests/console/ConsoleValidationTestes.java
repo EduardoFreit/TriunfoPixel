@@ -2,73 +2,126 @@ package br.ifpe.triunfopixel.tests.console;
 
 import br.ifpe.triunfopixel.model.Console;
 import br.ifpe.triunfopixel.tests.Teste;
-import java.util.List;
+import java.io.InputStream;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
  public class ConsoleValidationTestes extends Teste {
      
-     @Test
-    public void findGame() {}
+    private String string260;
      
-    /*@Before
+    @Before
     public void beforeTest(){
-
+        string260 = RandomStringUtils.randomAlphanumeric(260);
     }
+     
     
     @Test
-    public void findConsole() {
-        Console consoleFind = consoleService.findById(2L);
-        assertTrue(consoleFind.getNome().equals("SNES"));
-        assertTrue(consoleFind.getFabricante().equals("Nintendo"));
-        assertTrue(consoleFind.getAnoLancamento().equals(1990L));
-    }
-     
-     
-    @Test
-    public void insertConsole() {
-        List<Console> listConsoles = consoleService.listAll();
-        assertTrue(listConsoles.size() == 4);
-        
+    public void consoleSemGenero() {
         Console newConsole = new Console();
-        newConsole.setNome("PlayStation");
-        newConsole.setFabricante("Sony");
-        newConsole.setAnoLancamento(1994L);
+        newConsole.setNome(null);
+        newConsole.setAnoLancamento(1990L);
+        newConsole.setFabricante("Marca");
+        newConsole.setUrlImagem("https://teste.com");
         
-        consoleService.insert(newConsole);
-        
-        listConsoles = consoleService.listAll();
-        assertTrue(listConsoles.size() == 5);
+        Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
+        assertEquals(1, constraintViolations.size());
     }
     
     @Test
-    public void updateGame() {
-        Console consoleUpdate = consoleService.findById(1L);
-        assertTrue(consoleUpdate.getNome().equals("Game Boy Advance"));
-        assertTrue(consoleUpdate.getFabricante().equals("Nintendo"));
-        assertTrue(consoleUpdate.getAnoLancamento().equals(2001L));
-      
-        consoleUpdate.setNome("NES");
-        consoleUpdate.setAnoLancamento(1986L);
+    public void consoleSemAnoLancamento() {
+        Console newConsole = new Console();
+        newConsole.setNome("Nome");
+        newConsole.setAnoLancamento(null);
+        newConsole.setFabricante("Marca");
+        newConsole.setUrlImagem("https://teste.com");
         
-        consoleService.update(consoleUpdate);
-        
-        consoleUpdate = consoleService.findById(1L);
-        assertTrue(consoleUpdate.getNome().equals("NES"));
-        assertTrue(consoleUpdate.getAnoLancamento().equals(1986L));
+        Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
+        assertEquals(1, constraintViolations.size());
     }
     
     @Test
-    public void removeConsole() {
-        List<Console> listConsoles = consoleService.listAll();
-        assertTrue(listConsoles.size() == 4);
+    public void consoleSemFabricante() {
+        Console newConsole = new Console();
+        newConsole.setNome("Nome");
+        newConsole.setAnoLancamento(1990L);
+        newConsole.setFabricante(null);
+        newConsole.setUrlImagem("https://teste.com");
         
-        Console consoleDelete = consoleService.findById(1L);
-        consoleService.remove(consoleDelete);
+        Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void consoleSemUrlImagem() {
+        Console newConsole = new Console();
+        newConsole.setNome("Nome");
+        newConsole.setAnoLancamento(1990L);
+        newConsole.setFabricante("Marca");
+        newConsole.setUrlImagem(null);
         
-        listConsoles = consoleService.listAll();
-        assertTrue(listConsoles.size() == 3);
-    }*/
-
+        Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void consoleMenosDoisCaracteres() {
+        Console newConsole = new Console();
+        newConsole.setNome("N");
+        newConsole.setAnoLancamento(1990L);
+        newConsole.setFabricante("M");
+        newConsole.setUrlImagem("M");
+        
+        Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
+        assertEquals(4, constraintViolations.size());
+    }
+    
+    @Test
+    public void consoleMenos255Caracteres() {
+        Console newConsole = new Console();
+        newConsole.setNome(string260);
+        newConsole.setAnoLancamento(1990L);
+        newConsole.setFabricante(string260);
+        newConsole.setUrlImagem(string260);
+        
+        Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
+        assertEquals(4, constraintViolations.size());
+    }
+    
+    @Test
+    public void consoleSemUrlImagemValida() {
+        Console newConsole = new Console();
+        newConsole.setNome("Nome");
+        newConsole.setAnoLancamento(1990L);
+        newConsole.setFabricante("Marca");
+        newConsole.setUrlImagem("teste");
+        
+        Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test(expected = Exception.class)
+    public void downloadRomPackConsoleNull() throws Exception {
+        consoleService.getPackRomFile(null);
+    }
+    
+    @Test
+    public void downloadRomPackConsoleSemNome() throws Exception {
+        Console console = new Console();
+        InputStream result = consoleService.getPackRomFile(console);
+        assertNull(result);
+    }
+    
+    @Test
+    public void downloadRomPackConsoleNomeNaoExiste() throws Exception {
+        Console console = new Console();
+        console.setNome("PlayStation 9");
+        InputStream result = consoleService.getPackRomFile(console);
+        assertNull(result);
+    }
+    
 }

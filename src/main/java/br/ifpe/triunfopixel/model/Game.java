@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,11 +33,15 @@ public class Game implements Serializable {
     @NotNull(message = "O campo 'UrlImagem' é obrigatório.")
     @Size(min = 2, max = 255, message = "O campo 'UrlImagem' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Column(nullable = false)
+    @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
+        message = "Insira uma URL Válida para o campo 'UrlImagem")
     private String urlImagem;
     
     @NotNull(message = "O campo 'UrlRoom' é obrigatório.")
     @Size(min = 2, max = 255, message = "O campo 'UrlRoom' não pode ter menos de 2 ou mais de 255 caractéres.")
     @Column(nullable = false)
+    @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
+        message = "Insira uma URL Válida para o campo 'UrlRoom")
     private String urlRoom;
     
     @NotNull(message = "O campo 'Gênero' é obrigatório.")

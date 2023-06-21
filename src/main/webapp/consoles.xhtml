@@ -14,7 +14,7 @@
                 <ui:define name="title">Consoles</ui:define>
                 <ui:define name="content">
                     <h1>Consoles</h1>
-                    <p:commandButton rendered="#{!gameBean.usuario.isAdmin}" oncomplete="" update="" style="margin: 10px; width: 120px"
+                    <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="" update="" style="margin: 10px; width: 120px"
                                                  styleClass="ui-button-success" title="Cadastrar Console" value="Cadastrar" icon="pi pi-plus">                      
                     </p:commandButton>
                     <div class="card">

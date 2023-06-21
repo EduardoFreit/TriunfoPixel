@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 import org.primefaces.PrimeFaces;
@@ -46,27 +47,21 @@ public class ConsoleBean implements Serializable {
     private final ConsoleService consoleService = new ConsoleService();
 
     @NotNull(message = "O campo NOME é obrigatório.")
-    @NotEmpty(message = "O campo NOME deve conter no mínimo 2 caracteres.")
-    @NotBlank(message = "O campo NOME não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo NOME não pode ter menos de 2 ou mais de 255 caractéres.")
     private String name;
 
     @NotNull(message = "O campo ANO é obrigatório.")
-    @NotEmpty(message = "O campo ANO deve conter no 4 caracteres.")
-    @NotBlank(message = "O campo ANO não pode ser vazio.")
     @Length(min = 4, max = 4, message = "O campo ANO não deve ter 4 caractéres.")
     private String year;
 
     @NotNull(message = "O campo FABRICANTE é obrigatório.")
-    @NotEmpty(message = "O campo FABRICANTE deve conter no mínimo 2 caracteres.")
-    @NotBlank(message = "O campo FABRICANTE não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo FABRICANTE não pode ter menos de 2 ou mais de 255 caractéres.")
     private String manufacturer;
 
     @NotNull(message = "O campo URL DA IMAGEM é obrigatório.")
-    @NotEmpty(message = "O campo URL DA IMAGEM deve conter no mínimo 2 caracteres.")
-    @NotBlank(message = "O campo URL DA IMAGEM não pode ser vazio.")
     @Size(min = 4, max = 255, message = "O campo URL DA IMAGEM não pode ter menos de 2 ou mais de 255 caractéres.")
+    @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
+        message = "Insira uma URL Válida para o campo URL DA IMAGEM")
     private String urlImagem;
 
     @PostConstruct
@@ -102,19 +97,26 @@ public class ConsoleBean implements Serializable {
         newConsole.setAnoLancamento(parseLong(year));
         newConsole.setFabricante(manufacturer);
 
-        consoleService.insert(newConsole);
+        Boolean cadastroSucesso = consoleService.insert(newConsole);
 
         PrimeFaces.current().executeScript("PF('registerConsoleDialog').hide()");
         listConsoles = consoleService.listAll();
         PrimeFaces.current().ajax().update("form:tableConsoles");
 
-        limpaCampos();
+        limparCampos();
 
-        FacesMessage message = new FacesMessage("Console " + newConsole.getNome() + " adicionado com sucesso!");
+        FacesMessage message;
+        
+        if(cadastroSucesso) {
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Console " + newConsole.getNome() + " adicionado com sucesso!", null);
+        } else {
+            message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao cadastrar Console. Contate o suporte!", null);
+        }
+
         Util.getFacesContext().addMessage(null, message);
     }
 
-    public void limpaCampos() {
+    public void limparCampos() {
         name = "";
         urlImagem = "";
         year = "";

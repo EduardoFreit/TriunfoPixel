@@ -44,31 +44,26 @@ public class GameBean implements Serializable {
     private final GameService gameService = new GameService();
 
     @NotNull(message = "O campo NOME é obrigatório.")
-    @NotBlank(message = "O campo NOME não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo NOME não pode ter menos de 2 ou mais de 255 caractéres.")
     private String name;
 
     @NotNull(message = "O campo URL DA IMAGEM é obrigatório.")
-    @NotBlank(message = "O campo URL DA IMAGEM não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo URL DA IMAGEM não pode ter menos de 2 ou mais de 255 caractéres.")
     @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
             message = "Insira uma URL Válida para o campo URL DA IMAGEM")
     private String urlImagem;
 
     @NotNull(message = "O campo URL DA ROM é obrigatório.")
-    @NotBlank(message = "O campo URL DA ROM não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo URL DA ROM não pode ter menos de 2 ou mais de 255 caractéres.")
     @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
             message = "Insira uma URL Válida para o campo URL DA ROM")
     private String urlRoom;
 
     @NotNull(message = "O campo GÊNERO é obrigatório.")
-    @NotBlank(message = "O campo GÊNERO não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo GÊNERO não pode ter menos de 2 ou mais de 255 caractéres.")
     private String genre;
 
     @NotNull(message = "O campo HASH é obrigatório.")
-    @NotBlank(message = "O campo HASH não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo HASH não pode ter menos de 2 ou mais de 255 caractéres.")
     private String hash;
 

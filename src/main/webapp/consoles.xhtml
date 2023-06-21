@@ -57,11 +57,11 @@
                                                  icon="pi pi-info-circle" title="Detalhe do Console" action="#{consoleBean.prepareDownloadRomPack(console)}">
                                 </p:commandButton>                                                      
                                 
-                                <p:commandButton  oncomplete="" update="" style="margin: 1px"
+                                <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="" update="" style="margin: 1px"
                                                  styleClass="ui-button-danger" icon="pi pi-trash" title="Apagar Console">                      
                                 </p:commandButton>
                                 
-                                <p:commandButton  oncomplete="" update="" style="margin: 1px"
+                                <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="" update="" style="margin: 1px"
                                                  styleClass="ui-button-warning" icon="pi pi-pencil" title="Editar Console">                      
                                 </p:commandButton>
                             </p:column>                           

@@ -14,11 +14,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.model.StreamedContent;
-import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-@ApplicationScoped
+@SessionScoped
 @ManagedBean
 @Getter
 @Setter

@@ -50,7 +50,7 @@
                                 <h:outputText value="#{game.genre}"/>
                             </p:column>
 
-                            <p:column headerText="Ações" style="width:6rem;text-align: center;">
+                            <p:column headerText="Ações" style="width:10rem;text-align: center;">
                                 <p:commandButton  oncomplete="PF('gameDialog').show()" update=":form:gameDetail" style="margin: 1px"
                                                   icon="pi pi-info-circle" title="Detalhe do Jogo">
                                     <f:setPropertyActionListener value="#{game}"
@@ -66,7 +66,7 @@
                                     <p:confirm message="Tem certeza que deseja deletar o jogo?" icon="pi pi-trash"/>
                                 </p:commandButton>
 
-                                <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="" update="" style="margin: 1px"
+                                <p:commandButton rendered="#{false}" oncomplete="" update="" style="margin: 1px"
                                                  styleClass="ui-button-warning" icon="pi pi-pencil" title="Editar Jogo">                      
                                 </p:commandButton>
                             </p:column>
@@ -101,7 +101,7 @@
                             </p:column>
                         </p:outputPanel>
                     </p:dialog>
-
+                    
                     <p:confirmDialog global="true">
                         <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-danger"
                                          style="margin-left: 24px"/>

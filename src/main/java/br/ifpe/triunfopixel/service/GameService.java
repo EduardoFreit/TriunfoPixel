@@ -15,13 +15,13 @@ public class GameService implements Serializable, IBaseService<Game> {
     }
 
     @Override
-    public void insert(Game t) {
-        gameRepository.insert(t);
+    public Boolean insert(Game t) {
+        return gameRepository.insert(t);
     }
 
     @Override
-    public void insertAll(List<Game> list) {
-        gameRepository.insertAll(list);
+    public Boolean insertAll(List<Game> list) {
+        return gameRepository.insertAll(list);
     }
 
     @Override
@@ -30,8 +30,8 @@ public class GameService implements Serializable, IBaseService<Game> {
     }
 
     @Override
-    public void update(Game t) {
-        gameRepository.update(t);
+    public Boolean update(Game t) {
+        return gameRepository.update(t);
     }
 
     @Override

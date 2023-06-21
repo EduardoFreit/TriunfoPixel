@@ -19,13 +19,13 @@ public class UserService implements Serializable, IBaseService<Usr> {
     }
 
     @Override
-    public void insert(Usr t) {
-        userRepository.insert(t);
+    public Boolean insert(Usr t) {
+        return userRepository.insert(t);
     }
 
     @Override
-    public void insertAll(List<Usr> list) {
-        userRepository.insertAll(list);
+    public Boolean insertAll(List<Usr> list) {
+        return userRepository.insertAll(list);
     }
 
     @Override
@@ -34,8 +34,8 @@ public class UserService implements Serializable, IBaseService<Usr> {
     }
 
     @Override
-    public void update(Usr t) {
-        userRepository.update(t);
+    public Boolean update(Usr t) {
+        return userRepository.update(t);
     }
 
     @Override

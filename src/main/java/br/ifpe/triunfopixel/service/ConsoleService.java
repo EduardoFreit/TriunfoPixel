@@ -16,13 +16,13 @@ public class ConsoleService implements Serializable, IBaseService<Console> {
     }
 
     @Override
-    public void insert(Console t) {
-        consoleRepository.insert(t);
+    public Boolean insert(Console t) {
+        return consoleRepository.insert(t);
     }
 
     @Override
-    public void insertAll(List<Console> list) {
-        consoleRepository.insertAll(list);
+    public Boolean insertAll(List<Console> list) {
+        return consoleRepository.insertAll(list);
     }
 
     @Override
@@ -31,8 +31,8 @@ public class ConsoleService implements Serializable, IBaseService<Console> {
     }
 
     @Override
-    public void update(Console t) {
-        consoleRepository.update(t);
+    public Boolean update(Console t) {
+        return consoleRepository.update(t);
     }
 
     @Override

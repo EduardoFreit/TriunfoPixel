@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.primefaces.PrimeFaces;
 
@@ -43,31 +44,30 @@ public class GameBean implements Serializable {
     private final GameService gameService = new GameService();
 
     @NotNull(message = "O campo NOME é obrigatório.")
-    @NotEmpty(message = "O campo NOME deve conter no mínimo 2 caracteres.")
     @NotBlank(message = "O campo NOME não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo NOME não pode ter menos de 2 ou mais de 255 caractéres.")
     private String name;
 
     @NotNull(message = "O campo URL DA IMAGEM é obrigatório.")
-    @NotEmpty(message = "O campo URL DA IMAGEM deve conter no mínimo 2 caracteres.")
     @NotBlank(message = "O campo URL DA IMAGEM não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo URL DA IMAGEM não pode ter menos de 2 ou mais de 255 caractéres.")
+    @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
+            message = "Insira uma URL Válida para o campo URL DA IMAGEM")
     private String urlImagem;
 
     @NotNull(message = "O campo URL DA ROM é obrigatório.")
-    @NotEmpty(message = "O campo URL DA ROM deve conter no mínimo 2 caracteres.")
     @NotBlank(message = "O campo URL DA ROM não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo URL DA ROM não pode ter menos de 2 ou mais de 255 caractéres.")
+    @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
+            message = "Insira uma URL Válida para o campo URL DA ROM")
     private String urlRoom;
 
     @NotNull(message = "O campo GÊNERO é obrigatório.")
-    @NotEmpty(message = "O campo GÊNERO deve conter no mínimo 2 caracteres.")
     @NotBlank(message = "O campo GÊNERO não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo GÊNERO não pode ter menos de 2 ou mais de 255 caractéres.")
     private String genre;
 
     @NotNull(message = "O campo HASH é obrigatório.")
-    @NotEmpty(message = "O campo HASH deve conter no mínimo 2 caracteres.")
     @NotBlank(message = "O campo HASH não pode ser vazio.")
     @Size(min = 2, max = 255, message = "O campo HASH não pode ter menos de 2 ou mais de 255 caractéres.")
     private String hash;
@@ -91,19 +91,26 @@ public class GameBean implements Serializable {
         newGame.setHash(hash);
         newGame.setConsole(console);
 
-        gameService.insert(newGame);
+        Boolean cadastroSucesso = gameService.insert(newGame);
 
         PrimeFaces.current().executeScript("PF('registerGameDialog').hide()");
         listGames = gameService.listAll();
         PrimeFaces.current().ajax().update("form:tableGames");
 
-        limpaCampos();
+        limparCampos();
+        
+        FacesMessage message;
+        
+        if(cadastroSucesso) {
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Jogo " + newGame.getName() + " adicionado com sucesso!", null);
+        } else {
+            message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao cadastrar jogo. Contate o suporte!", null);
+        }
 
-        FacesMessage message = new FacesMessage("Jogo " + newGame.getName() + " adicionado com sucesso!");
         Util.getFacesContext().addMessage(null, message);
     }
 
-    public void limpaCampos() {
+    public void limparCampos() {
         name = "";
         urlImagem = "";
         urlRoom = "";
@@ -112,13 +119,12 @@ public class GameBean implements Serializable {
     }
 
     public void deletaJogo() {
-        FacesMessage message = new FacesMessage("Jogo " + selectedGame.getName() + " deletado com sucesso!");
-        Util.getFacesContext().addMessage(null, message);
 
         gameService.remove(selectedGame);
-
         listGames = gameService.listAll();
 
+        FacesMessage message = new FacesMessage("Jogo " + selectedGame.getName() + " deletado com sucesso!");
+        Util.getFacesContext().addMessage(null, message);
         PrimeFaces.current().ajax().update("form:tableGames");
     }
 

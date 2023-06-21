@@ -29,7 +29,7 @@ import org.junit.Before;
         newGame.setName("Alien Trilogy");
         newGame.setGenre("First-Person Shooter");
         newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
-        newGame.setUrlRoom("testes");
+        newGame.setUrlRoom("https://teste.com");
         newGame.setHash("testes");
         
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
@@ -40,10 +40,10 @@ import org.junit.Before;
     public void gameSemNome() {
         Game newGame = new Game();
         newGame.setConsole(console1);
-        newGame.setName("");
+        newGame.setName(null);
         newGame.setGenre("First-Person Shooter");
         newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
-        newGame.setUrlRoom("testes");
+        newGame.setUrlRoom("https://teste.com");
         newGame.setHash("testes");
         
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
@@ -55,9 +55,9 @@ import org.junit.Before;
         Game newGame = new Game();
         newGame.setConsole(console1);
         newGame.setName("Alien Trilogy");
-        newGame.setGenre("");
+        newGame.setGenre(null);
         newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
-        newGame.setUrlRoom("testes");
+        newGame.setUrlRoom("https://teste.com");
         newGame.setHash("testes");
         
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
@@ -70,12 +70,12 @@ import org.junit.Before;
         newGame.setConsole(console1);
         newGame.setName("Alien Trilogy");
         newGame.setGenre("First-Person Shooter");
-        newGame.setUrlImagem("");
+        newGame.setUrlImagem(null);
         newGame.setUrlRoom("testes");
         newGame.setHash("testes");
         
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
-        assertEquals(1, constraintViolations.size());
+        assertEquals(2, constraintViolations.size());
     }
     
     @Test
@@ -85,11 +85,11 @@ import org.junit.Before;
         newGame.setName("Alien Trilogy");
         newGame.setGenre("First-Person Shooter");
         newGame.setUrlImagem("testes");
-        newGame.setUrlRoom("");
+        newGame.setUrlRoom(null);
         newGame.setHash("testes");
         
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
-        assertEquals(1, constraintViolations.size());
+        assertEquals(2, constraintViolations.size());
     }
     
     @Test
@@ -99,7 +99,7 @@ import org.junit.Before;
         newGame.setName("Alien Trilogy");
         newGame.setGenre("First-Person Shooter");
         newGame.setUrlImagem("testes");
-        newGame.setUrlRoom("");
+        newGame.setUrlRoom("https://teste.com/");
         newGame.setHash("testes");
         
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
@@ -117,7 +117,7 @@ import org.junit.Before;
         newGame.setHash("t");
         
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
-        assertEquals(5, constraintViolations.size());
+        assertEquals(7, constraintViolations.size());
     }
     
     @Test
@@ -131,7 +131,35 @@ import org.junit.Before;
         newGame.setHash(string260);
         
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
-        assertEquals(5, constraintViolations.size());
+        assertEquals(7, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameSemUrlImageValida() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("sdasda");
+        newGame.setUrlRoom("testes");
+        newGame.setHash("testes");
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(2, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameSemUrlRomValida() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("testes");
+        newGame.setUrlRoom("wwqewqweeqwqwe");
+        newGame.setHash("testes");
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(2, constraintViolations.size());
     }
     
 }

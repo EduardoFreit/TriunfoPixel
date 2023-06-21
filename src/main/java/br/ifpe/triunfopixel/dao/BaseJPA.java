@@ -1,14 +1,17 @@
 package br.ifpe.triunfopixel.dao;
 
 import java.util.List;
+import java.util.Set;
+import javax.validation.Validator;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
 
 public abstract class BaseJPA<T> {
     
     private final EntityManager em = DAO.getEntityManager();
-    //protected ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    //protected Validator validator = factory.getValidator();
+    protected Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
     
     private final Class<T> cls;
     
@@ -16,18 +19,31 @@ public abstract class BaseJPA<T> {
         this.cls = cls;
     }
     
-    public void insert(T t) {
-        em.getTransaction().begin();
-        em.persist(t);
-        em.getTransaction().commit();
+    public Boolean insert(T t) {
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(t);
+        if(constraintViolations.isEmpty()) {
+            em.getTransaction().begin();
+            em.persist(t);
+            em.getTransaction().commit();
+        } else {
+            return false;
+        }
+        return true;
     }
     
-    public void insertAll(List<T> list) {
+    public Boolean insertAll(List<T> list) {
+        Set<ConstraintViolation<T>> constraintViolations;
         em.getTransaction().begin();
         for (T t : list) {
-            em.persist(t);
+            constraintViolations = validator.validate(t);
+            if(constraintViolations.isEmpty()) {
+                em.persist(t);
+            } else {
+                return false;
+            }
         }
         em.getTransaction().commit();
+        return true;
     }
 
     public void remove(T t) {
@@ -36,10 +52,16 @@ public abstract class BaseJPA<T> {
         em.getTransaction().commit();
     }
 
-    public void update(T t) {
-        em.getTransaction().begin();
-        em.merge(t);
-        em.getTransaction().commit();
+    public Boolean update(T t) {
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(t);
+        if(constraintViolations.isEmpty()) {
+            em.getTransaction().begin();
+            em.merge(t);
+            em.getTransaction().commit();
+        } else {
+            return false;
+        }
+        return true;
     }
 
     public List<T> listAll() {

@@ -8,13 +8,13 @@ import java.util.List;
  */
 public interface IBaseService<T> {
     
-    public void insert(T t);
+    public Boolean insert(T t);
     
-    public void insertAll(List<T> list);
+    public Boolean insertAll(List<T> list);
     
     public void remove(T t);
     
-    public void update(T t);
+    public Boolean update(T t);
     
     public List<T> listAll();
     

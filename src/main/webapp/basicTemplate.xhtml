@@ -22,16 +22,52 @@
                 <p:divider layout="vertical" rendered="#{gameBean.usuario.isAdmin}"/>
                 <p:menuitem value="Usuários" icon="pi pi-fw pi-user" url="/TriunfoPixel/users.xhtml" outcome="null" rendered="#{gameBean.usuario.isAdmin}"/>
                 <f:facet name="options">
-                        <p:commandButton value="Logout" action="#{loginBean.logout}" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
+                    <p:commandButton value="Logout" action="#{loginBean.logout}" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
                 </f:facet>
             </p:menubar>
-            
+
             <div id="content" class="center_content">
                 <div class="container-fluid">
                     <ui:insert name="content">Content</ui:insert>
                 </div>
             </div>
         </h:form>
-    </h:body>
 
+        <p:dialog id="registerDialog" header="Cadastrar Jogo" widgetVar="registerGameDialog" modal="true"
+                  showEffect="fade" resizable="false" draggable="false">
+            <h:form>
+                <p:growl showDetail="false" life="5000"/>
+
+                <p:panelGrid id="panel" columns="2" styleClass="ui-panelgrid-blank ui-fluid">
+                    <p:outputLabel for="@next" value="Nome" style="font-weight: bold"/>
+                    <p:inputText id="name" value="#{gameBean.name}" label="Name"/>
+
+                    <p:outputLabel for="@next" value="URL da Imagem" style="font-weight: bold"/>
+                    <p:inputText value="#{gameBean.urlImagem}"/>
+
+                    <p:outputLabel for="@next" value="URL da ROM" style="font-weight: bold"/>
+                    <p:inputText value="#{gameBean.urlRoom}"/>
+
+                    <p:outputLabel for="@next" value="Gênero" style="font-weight: bold"/>
+                    <p:inputText value="#{gameBean.genre}"/>
+
+                    <p:outputLabel for="@next" value="Hash" style="font-weight: bold"/>
+                    <p:inputText value="#{gameBean.hash}"/>
+
+                    <p:outputLabel for="@next" value="Console" style="font-weight: bold"/>
+                    <p:selectOneMenu value="#{gameBean.console}" converter="consoleConverter">
+                        <f:selectItems value="#{consoleBean.listConsoles}" var="console"
+                                       itemLabel="#{console.nome}" itemValue="#{console}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+
+                <div align="right" style="margin-top: 24px">
+                    <p:commandButton value="Cancelar" onclick="PF('registerGameDialog').hide()"
+                                     style="margin-right: 16px" styleClass="ui-button-flat ui-button-danger"/>
+
+                    <p:commandButton update="@form @(#gameTable)" action="#{gameBean.register}" value="Cadastrar"/>
+                </div>
+            </h:form>
+        </p:dialog>
+    </h:body>
 </html>

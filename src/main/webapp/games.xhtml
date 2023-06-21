@@ -13,17 +13,19 @@
             <ui:composition template="/basicTemplate.xhtml">
                 <ui:define name="title">Games</ui:define>
                 <ui:define name="content">
+                    <p:growl id="growl" showDetail="false" life="5000"/>
+
                     <h1>Jogos</h1>
-                    <p:commandButton rendered="#{gameBean.usuario.isAdmin}"  oncomplete="" update="" style="margin: 10px; width: 120px"
-                                                 styleClass="ui-button-success" title="Cadastrar Jogo" value="Cadastrar" icon="pi pi-plus">                      
+                    <p:commandButton rendered="#{gameBean.usuario.isAdmin}"  oncomplete="PF('registerGameDialog').show()" style="margin: 10px; width: 120px"
+                                     styleClass="ui-button-success" title="Cadastrar Jogo" value="Cadastrar" icon="pi pi-plus">                      
                     </p:commandButton>
                     <div class="card">
                         <p:dataTable id="tableGames" var="game" value="#{gameBean.listGames}"
-                                widgetVar="gamesTable" multiViewState="true" rows="5" paginator="true"
-                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                rowsPerPageTemplate="5,10" rowKey="#{game.id}"
-                                emptyMessage="Nenhum Jogo Encontrado">
-                            
+                                     widgetVar="gamesTable" multiViewState="true" rows="5" paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10" rowKey="#{game.id}"
+                                     emptyMessage="Nenhum Jogo Encontrado">
+
                             <f:facet name="header">
                                 <p:outputPanel>
                                     <h:outputText value="Buscar: " class="me-2"/>
@@ -50,15 +52,20 @@
 
                             <p:column headerText="Ações" style="width:6rem;text-align: center;">
                                 <p:commandButton  oncomplete="PF('gameDialog').show()" update=":form:gameDetail" style="margin: 1px"
-                                                 icon="pi pi-info-circle" title="Detalhe do Jogo">
+                                                  icon="pi pi-info-circle" title="Detalhe do Jogo">
                                     <f:setPropertyActionListener value="#{game}"
                                                                  target="#{gameBean.selectedGame}"/>
                                 </p:commandButton>
-                                
-                                <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="" update="" style="margin: 1px"
-                                                 styleClass="ui-button-danger" icon="pi pi-trash" title="Apagar Jogo">                      
+
+                                <p:commandButton rendered="#{gameBean.usuario.isAdmin}" action="#{gameBean.deletaJogo()}" 
+                                                 update=":form:tableGames :form:growl" style="margin: 1px"
+                                                 styleClass="ui-button-danger" icon="pi pi-trash" title="Apagar Jogo">
+                                    <f:setPropertyActionListener value="#{game}"
+                                                                 target="#{gameBean.selectedGame}"/>
+
+                                    <p:confirm message="Tem certeza que deseja deletar o jogo?" icon="pi pi-trash"/>
                                 </p:commandButton>
-                                
+
                                 <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="" update="" style="margin: 1px"
                                                  styleClass="ui-button-warning" icon="pi pi-pencil" title="Editar Jogo">                      
                                 </p:commandButton>
@@ -69,7 +76,7 @@
 
 
                     <p:dialog header="Info do Jogo" widgetVar="gameDialog" modal="true" showEffect="fade"
-                            hideEffect="fade" resizable="false">
+                              hideEffect="fade" resizable="false">
                         <p:outputPanel id="gameDetail" style="text-align:center;">
                             <p:column rendered="#{not empty gameBean.selectedGame}">
                                 <div class="game">
@@ -85,8 +92,8 @@
                                         </div>
                                         <div class="game-list-action">
                                             <p:commandButton disableOnAjax="false" action="#{gameBean.prepareDownload()}"            
-                                                    value="Baixar Rom"
-                                                    icon="pi pi-cloud-download">
+                                                             value="Baixar Rom"
+                                                             icon="pi pi-cloud-download">
                                             </p:commandButton>
                                         </div>
                                     </div>
@@ -94,6 +101,12 @@
                             </p:column>
                         </p:outputPanel>
                     </p:dialog>
+
+                    <p:confirmDialog global="true">
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-danger"
+                                         style="margin-left: 24px"/>
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes ui-button-flat"/>
+                    </p:confirmDialog>
                 </ui:define>
             </ui:composition>
         </div>

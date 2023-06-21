@@ -38,7 +38,7 @@ public class Console implements Serializable {
     
     @NotNull(message = "O campo 'Nome' é obrigatório.")
     @Size(min = 2, max = 255, message = "O campo 'Nome' não pode ter menos de 2 ou mais de 255 caractéres.")
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nome;
     
     @NotNull(message = "O campo 'Ano do Lancamento' é obrigatório.")

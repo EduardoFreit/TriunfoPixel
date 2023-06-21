@@ -19,8 +19,8 @@
                 <p:menuitem value="Jogos" icon="pi pi-fw pi-file-o"  url="/TriunfoPixel/games.xhtml" outcome="null"/>
                 <p:divider layout="vertical"/>
                 <p:menuitem value="Consoles" icon="pi pi-fw pi-desktop" url="/TriunfoPixel/consoles.xhtml" outcome="null"/>
-                <p:divider layout="vertical"/>
-                <p:menuitem value="Usuários" icon="pi pi-fw pi-user" url="/TriunfoPixel/users.xhtml" outcome="null"/>
+                <p:divider layout="vertical" rendered="#{!gameBean.usuario.isAdmin}"/>
+                <p:menuitem value="Usuários" icon="pi pi-fw pi-user" url="/TriunfoPixel/users.xhtml" outcome="null" rendered="#{!gameBean.usuario.isAdmin}"/>
                 <f:facet name="options">
                         <p:commandButton value="Logout" action="#{loginBean.logout}" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
                 </f:facet>

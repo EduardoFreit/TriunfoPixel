@@ -1,7 +1,9 @@
 package br.ifpe.triunfopixel.bean;
 
 import br.ifpe.triunfopixel.model.Game;
+import br.ifpe.triunfopixel.model.Usr;
 import br.ifpe.triunfopixel.service.GameService;
+import br.ifpe.triunfopixel.util.Util;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,10 +14,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.model.StreamedContent;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
-@SessionScoped
+@ApplicationScoped
 @ManagedBean
 @Getter
 @Setter
@@ -26,12 +29,15 @@ public class GameBean implements Serializable {
     private List<Game> listGames = new ArrayList<>();
     private Game selectedGame = new Game();
     private StreamedContent file;
+    private Usr usuario;
     
     @Getter(AccessLevel.NONE)@Setter(AccessLevel.NONE)
     private final GameService gameService = new GameService();
     
     @PostConstruct
     public void init() {
+        HttpServletRequest request =  (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        usuario = Util.getLoginUSer(request);
         listGames = gameService.listAll();
     }
     

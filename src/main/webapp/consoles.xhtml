@@ -14,7 +14,7 @@
                 <ui:define name="title">Consoles</ui:define>
                 <ui:define name="content">
                     <h1>Consoles</h1>
-                    <p:commandButton rendered="true" oncomplete="PF('registerConsoleDialog').show()" style="margin: 10px; width: 120px"
+                    <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="PF('registerConsoleDialog').show()" style="margin: 10px; width: 120px"
                                      styleClass="ui-button-success" title="Cadastrar Console" value="Cadastrar" icon="pi pi-plus">                      
                     </p:commandButton>
                     <div class="card">
@@ -58,7 +58,7 @@
                                 </p:commandButton>                                                      
 
                                 <p:commandButton update=":form:tableConsoles" style="margin: 1px" action="#{consoleBean.deletarConsole()}"
-                                                 styleClass="ui-button-danger" icon="pi pi-trash" title="Apagar Console">       
+                                                 styleClass="ui-button-danger" icon="pi pi-trash" title="Apagar Console" rendered="#{gameBean.usuario.isAdmin}" >       
                                     <f:setPropertyActionListener value="#{console}"
                                                                  target="#{consoleBean.selectedConsole}"/>
                                     <p:confirm message="Tem certeza que deseja deletar o console?" icon="pi pi-trash"/>

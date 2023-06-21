@@ -14,16 +14,16 @@
                 <ui:define name="title">Consoles</ui:define>
                 <ui:define name="content">
                     <h1>Consoles</h1>
-                    <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="" update="" style="margin: 10px; width: 120px"
-                                                 styleClass="ui-button-success" title="Cadastrar Console" value="Cadastrar" icon="pi pi-plus">                      
+                    <p:commandButton rendered="true" oncomplete="PF('registerConsoleDialog').show()" style="margin: 10px; width: 120px"
+                                     styleClass="ui-button-success" title="Cadastrar Console" value="Cadastrar" icon="pi pi-plus">                      
                     </p:commandButton>
                     <div class="card">
                         <p:dataTable id="tableConsoles" var="console" value="#{consoleBean.listConsoles}"
-                                widgetVar="consoleTable" multiViewState="true" rows="5" paginator="true"
-                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                rowsPerPageTemplate="5,10" rowKey="#{console.id}"
-                                emptyMessage="Nenhum Console Encontrado">
-                            
+                                     widgetVar="consoleTable" multiViewState="true" rows="5" paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10" rowKey="#{console.id}"
+                                     emptyMessage="Nenhum Console Encontrado">
+
                             <f:facet name="header">
                                 <p:outputPanel>
                                     <h:outputText value="Buscar: " class="me-2"/>
@@ -31,7 +31,7 @@
                                                  placeholder="Digite alguma chave"/>
                                 </p:outputPanel>
                             </f:facet>
-                            
+
                             <p:column headerText="Nome" filterBy="#{console.nome}" sortBy="#{console.nome}"
                                       filterMatchMode="contains" sortOrder="ascending" >
                                 <h:outputText value="#{console.nome}"/>
@@ -46,39 +46,42 @@
                                       filterMatchMode="contains">
                                 <h:outputText value="#{console.fabricante}"/>
                             </p:column>
-                            
+
                             <p:column headerText="Ações" style="width:6rem;text-align: center;">
                                 <p:commandButton  oncomplete="PF('gamesDialog').show()" update=":form:gamesDetail" style="margin: 1px"
-                                                 icon="pi pi-list" title="Listar Jogos">
+                                                  icon="pi pi-list" title="Listar Jogos">
                                     <f:setPropertyActionListener value="#{console}"
                                                                  target="#{consoleBean.selectedConsole}"/>
                                 </p:commandButton>
                                 <p:commandButton  oncomplete="PF('consoleDialog').show()" update=":form:consoleDetail" style="margin: 1px"
-                                                 icon="pi pi-info-circle" title="Detalhe do Console" action="#{consoleBean.prepareDownloadRomPack(console)}">
+                                                  icon="pi pi-info-circle" title="Detalhe do Console" action="#{consoleBean.prepareDownloadRomPack(console)}">
                                 </p:commandButton>                                                      
-                                
-                                <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="" update="" style="margin: 1px"
-                                                 styleClass="ui-button-danger" icon="pi pi-trash" title="Apagar Console">                      
+
+                                <p:commandButton update=":form:tableConsoles" style="margin: 1px" action="#{consoleBean.deletarConsole()}"
+                                                 styleClass="ui-button-danger" icon="pi pi-trash" title="Apagar Console">       
+                                    <f:setPropertyActionListener value="#{console}"
+                                                                 target="#{consoleBean.selectedConsole}"/>
+                                    <p:confirm message="Tem certeza que deseja deletar o console?" icon="pi pi-trash"/>
                                 </p:commandButton>
-                                
-                                <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="" update="" style="margin: 1px"
+
+                                <p:commandButton rendered="#{consoleBean.usuario.isAdmin}" oncomplete="" update="" style="margin: 1px"
                                                  styleClass="ui-button-warning" icon="pi pi-pencil" title="Editar Console">                      
                                 </p:commandButton>
                             </p:column>                           
                         </p:dataTable>
                     </div>
-                    
+
                     <p:dialog header="Jogos do Console" widgetVar="gamesDialog" modal="true" showEffect="fade"
-                            hideEffect="fade" resizable="false">
+                              hideEffect="fade" resizable="false">
                         <p:outputPanel id="gamesDetail" style="text-align:center;">
                             <p:column rendered="#{not empty consoleBean.selectedConsole}">
                                 <div class="games">
                                     <div class="games-list-item d-flex justify-content-between mb-3" style="width: 45vw">
                                         <p:dataTable id="tableGames" var="game" value="#{consoleBean.selectedConsole.jogos}"
-                                                widgetVar="gamesTable" multiViewState="true" rows="5" paginator="true"
-                                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                                                rowsPerPageTemplate="5" rowKey="#{game.id}"
-                                                emptyMessage="Nenhum Jogo Encontrado">
+                                                     widgetVar="gamesTable" multiViewState="true" rows="5" paginator="true"
+                                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                                     rowsPerPageTemplate="5" rowKey="#{game.id}"
+                                                     emptyMessage="Nenhum Jogo Encontrado">
 
                                             <p:column headerText="Nome" filterBy="#{game.name}" sortBy="#{game.name}"
                                                       filterMatchMode="contains" sortOrder="ascending" >
@@ -96,9 +99,9 @@
                                             </p:column>
                                             <p:column headerText="Ações" style="width:6rem;text-align: center;">
                                                 <p:commandButton disableOnAjax="false" 
-                                                        action="#{consoleBean.prepareDownloadGame(game.urlRoom)}"     
-                                                        title="Download Jogo"
-                                                        icon="pi pi-cloud-download">
+                                                                 action="#{consoleBean.prepareDownloadGame(game.urlRoom)}"     
+                                                                 title="Download Jogo"
+                                                                 icon="pi pi-cloud-download">
                                                 </p:commandButton>
                                             </p:column>
 
@@ -108,9 +111,9 @@
                             </p:column>
                         </p:outputPanel>
                     </p:dialog>
-                    
+
                     <p:dialog header="Info do Console" widgetVar="consoleDialog" modal="true" showEffect="fade"
-                            hideEffect="fade" resizable="false">
+                              hideEffect="fade" resizable="false">
                         <p:outputPanel id="consoleDetail" style="text-align:center;">
                             <p:column rendered="#{not empty consoleBean.selectedConsole}">
                                 <div class="console">
@@ -125,8 +128,8 @@
                                         </div>
                                         <div class="game-list-action">
                                             <p:commandButton disableOnAjax="false"            
-                                                    value="Baixar Rom Pack"
-                                                    icon="pi pi-cloud-download">
+                                                             value="Baixar Rom Pack"
+                                                             icon="pi pi-cloud-download">
                                                 <p:fileDownload value="#{consoleBean.file}"/>
                                             </p:commandButton>
                                         </div>
@@ -136,9 +139,13 @@
                         </p:outputPanel>
                     </p:dialog>
 
+                    <p:confirmDialog global="true">
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-danger"
+                                         style="margin-left: 24px"/>
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes ui-button-flat"/>
+                    </p:confirmDialog>
                 </ui:define>
             </ui:composition>
         </div>
     </h:body>
 </html>
-

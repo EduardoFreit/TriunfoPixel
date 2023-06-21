@@ -69,5 +69,34 @@
                 </div>
             </h:form>
         </p:dialog>
+
+        <p:dialog id="registerConsoleDialog" header="Cadastrar Console" widgetVar="registerConsoleDialog" modal="true"
+                  showEffect="fade" resizable="false" draggable="false">
+            <h:form>
+                <p:growl showDetail="false" life="5000"/>
+
+                <p:panelGrid id="panel" columns="2" styleClass="ui-panelgrid-blank ui-fluid">
+                    <p:outputLabel for="@next" value="Nome" style="font-weight: bold"/>
+                    <p:inputText value="#{consoleBean.name}"/>
+
+                    <p:outputLabel for="@next" value="Ano de Lançamento" style="font-weight: bold"/>
+                    <p:inputText value="#{consoleBean.year}"/>
+
+                    <p:outputLabel for="@next" value="Fabricante" style="font-weight: bold"/>
+                    <p:inputText value="#{consoleBean.manufacturer}"/>
+
+                    <p:outputLabel for="@next" value="URL da Imagem" style="font-weight: bold"/>
+                    <p:inputText value="#{consoleBean.urlImagem}"/>
+
+                </p:panelGrid>
+
+                <div align="right" style="margin-top: 24px">
+                    <p:commandButton value="Cancelar" onclick="PF('registerConsoleDialog').hide()"
+                                     style="margin-right: 16px" styleClass="ui-button-flat ui-button-danger"/>
+
+                    <p:commandButton update="@form @(#gameTable)" action="#{consoleBean.registerConsole}" value="Cadastrar"/>
+                </div>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>

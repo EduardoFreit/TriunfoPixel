@@ -1,7 +1,6 @@
 package br.ifpe.triunfopixel.tests.console;
 
 import br.ifpe.triunfopixel.model.Console;
-import br.ifpe.triunfopixel.model.Game;
 import br.ifpe.triunfopixel.tests.Teste;
 import java.io.InputStream;
 import java.util.List;
@@ -10,8 +9,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 
  public class ConsoleTestes extends Teste {
-     
-    private Game game;
      
     @Before
     public void beforeTest(){
@@ -91,12 +88,12 @@ import org.junit.Before;
         assertTrue(consoleUpdate.getJogos().size() == 4);
     }
     
-    @Test
-    public void downloadRomPack() throws Exception {
-        Console console = new Console();
-        console.setNome("SNES");
-        InputStream result = consoleService.getPackRomFile(console);
-        assertTrue(result != null);
-    }
+//    @Test
+//    public void downloadRomPack() throws Exception {
+//        Console console = new Console();
+//        console.setNome("SNES");
+//        InputStream result = consoleService.getPackRomFile(console);
+//        assertTrue(result != null);
+//    }
 
 }

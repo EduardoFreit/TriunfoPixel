@@ -41,12 +41,7 @@
                         <p:column headerText="Usuário Administrador" filterBy="#{usuario.isAdmin}" sortBy="#{usuario.isAdmin}"
                                       filterMatchMode="contains">
                                 <h:outputText value="#{usuario.isAdmin}"/>
-                            </p:column>   
-                        
-                        <p:column headerText="Senha" filterBy="#{usuario.password}" sortBy="#{usuario.password}"
-                                      filterMatchMode="contains">
-                            <h:outputText value="#{usuario.password}"/>
-                            </p:column>
+                            </p:column>                                               
                         </p:dataTable>
                 </ui:define>
             </ui:composition>

@@ -19,8 +19,6 @@ import lombok.Setter;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -73,7 +71,7 @@ public class ConsoleBean implements Serializable {
 
     public void prepareDownloadRomPack(Console selectedConsole) throws Exception {
         this.selectedConsole = selectedConsole;
-        InputStream it = consoleService.getPackRomFile(selectedConsole);
+        InputStream it = consoleService.getRomPackFile(selectedConsole);
         file = DefaultStreamedContent.builder()
                 .name(selectedConsole.getNome() + ".zip")
                 .contentType("application/zip")

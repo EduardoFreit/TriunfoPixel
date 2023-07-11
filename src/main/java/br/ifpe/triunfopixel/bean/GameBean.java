@@ -6,6 +6,7 @@ import br.ifpe.triunfopixel.model.Usr;
 import br.ifpe.triunfopixel.service.GameService;
 import br.ifpe.triunfopixel.util.Util;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +20,11 @@ import org.primefaces.model.StreamedContent;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.primefaces.PrimeFaces;
+import org.primefaces.model.DefaultStreamedContent;
 
 @SessionScoped
 @ManagedBean
@@ -36,7 +36,7 @@ public class GameBean implements Serializable {
 
     private List<Game> listGames = new ArrayList<>();
     private Game selectedGame = new Game();
-    private StreamedContent file;
+     private StreamedContent file;
     private Usr usuario;
 
     @Getter(AccessLevel.NONE)
@@ -81,7 +81,6 @@ public class GameBean implements Serializable {
         Game newGame = new Game();
         newGame.setName(name);
         newGame.setUrlImagem(urlImagem);
-        newGame.setUrlRoom(urlRoom);
         newGame.setGenre(genre);
         newGame.setHash(hash);
         newGame.setConsole(console);
@@ -123,10 +122,15 @@ public class GameBean implements Serializable {
         PrimeFaces.current().ajax().update("form:tableGames");
     }
 
-    public void prepareDownload() {
+    public void prepareDownload(Game game) throws Exception {
+        this.selectedGame = game;
         try {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.getExternalContext().redirect(this.selectedGame.getUrlRoom());
+            InputStream it = gameService.getRomFile(selectedGame);
+            file = DefaultStreamedContent.builder()
+                    .name(selectedGame.getName() + ".zip")
+                    .contentType("application/zip")
+                    .stream(() -> it)
+                    .build();
         } catch (IOException e) {
             e.printStackTrace();
         }

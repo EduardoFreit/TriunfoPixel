@@ -1,7 +1,9 @@
 package br.ifpe.triunfopixel.service;
 
+import br.ifpe.triunfopixel.model.Console;
 import br.ifpe.triunfopixel.model.Game;
 import br.ifpe.triunfopixel.repository.GameRepository;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 
@@ -47,5 +49,22 @@ public class GameService implements Serializable, IBaseService<Game> {
     @Override
     public List<Game> read(String query) {
         return gameRepository.read(query);
+    }
+    
+    public InputStream getRomFile(Game game) throws Exception {
+        InputStream input = null;
+        if(game == null) {
+            throw new Exception();
+        }
+        String fileName = game.getName()+ ".zip";
+        String pathRomWindows = "consoles\\" + game.getConsole().getNome() + 
+                "\\roms\\" + fileName;
+        String pathRomLinux="consoles/" + game.getConsole().getNome() + 
+                "/roms/" + fileName;
+        input = getClass().getClassLoader().getResourceAsStream(pathRomWindows);
+        if(input == null) {
+            input = getClass().getClassLoader().getResourceAsStream(pathRomLinux);
+        }
+        return input;
     }
 }

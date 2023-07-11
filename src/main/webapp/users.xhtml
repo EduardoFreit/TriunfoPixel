@@ -13,17 +13,17 @@
             <ui:composition template="/basicTemplate.xhtml">
                 <ui:define name="title">Usuários</ui:define>
                 <ui:define name="content">
-                    <h2>Usuários</h2>
-                    <p:dataTable id="tableConsoles" var="usuario" value="#{usuarioBean.listUsuarios}"
-                                     widgetVar="consoleTable" multiViewState="true" rows="5" paginator="true"
+                    <h1>Usuários</h1>
+                    <p:dataTable id="tableUser" var="usuario" value="#{usuarioBean.listUsuarios}"
+                                     widgetVar="userTable" multiViewState="true" rows="5" paginator="true"
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="5,10" rowKey="#{usuario.id}"
-                                     emptyMessage="Nenhum Console Encontrado">
+                                     emptyMessage="Nenhum Usuário Encontrado">
 
                             <f:facet name="header">
                                 <p:outputPanel>
                                     <h:outputText value="Buscar: " class="me-2"/>
-                                    <p:inputText id="globalFilter" onkeyup="PF('consoleTable').filter()" class="w-150"
+                                    <p:inputText id="globalFilter" onkeyup="PF('userTable').filter()" class="w-150"
                                                  placeholder="Digite o nome do usuário"/>
                                 </p:outputPanel>
                             </f:facet>

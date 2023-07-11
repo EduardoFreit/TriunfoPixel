@@ -50,17 +50,17 @@ public class ConsoleService implements Serializable, IBaseService<Console> {
         return consoleRepository.read(query);
     }
     
-    public InputStream getPackRomFile(Console selectedConsole) throws Exception {
+    public InputStream getRomPackFile(Console selectedConsole) throws Exception {
         InputStream input = null;
         if(selectedConsole == null) {
             throw new Exception();
         }
         String fileName = selectedConsole.getNome() + ".zip";
-        String pathRomWin ="consoles\\" + fileName;
-        String pathRomLin="consoles/" + fileName;
-        input = getClass().getClassLoader().getResourceAsStream(pathRomWin);
+        String pathRomWindows ="consoles\\" + fileName;
+        String pathRomLinux ="consoles/" + fileName;
+        input = getClass().getClassLoader().getResourceAsStream(pathRomWindows);
         if(input == null) {
-            input = getClass().getClassLoader().getResourceAsStream(pathRomLin);
+            input = getClass().getClassLoader().getResourceAsStream(pathRomLinux);
         }
         return input;
     }

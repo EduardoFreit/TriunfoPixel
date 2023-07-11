@@ -106,13 +106,13 @@ import org.junit.Before;
     
     @Test(expected = Exception.class)
     public void downloadRomPackConsoleNull() throws Exception {
-        consoleService.getPackRomFile(null);
+        consoleService.getRomPackFile(null);
     }
     
     @Test
     public void downloadRomPackConsoleSemNome() throws Exception {
         Console console = new Console();
-        InputStream result = consoleService.getPackRomFile(console);
+        InputStream result = consoleService.getRomPackFile(console);
         assertNull(result);
     }
     
@@ -120,7 +120,7 @@ import org.junit.Before;
     public void downloadRomPackConsoleNomeNaoExiste() throws Exception {
         Console console = new Console();
         console.setNome("PlayStation 9");
-        InputStream result = consoleService.getPackRomFile(console);
+        InputStream result = consoleService.getRomPackFile(console);
         assertNull(result);
     }
     

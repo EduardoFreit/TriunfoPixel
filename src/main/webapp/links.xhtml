@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="card">
+            <ui:composition template="/basicTemplate.xhtml">
+                <ui:define name="title">Links Úteis</ui:define>
+                <ui:define name="content">
+                    <h2 style="margin-bottom: 1em;">Links</h2>
+                    <p:link href="#{linkBean.linkRetroarch}" target="_blank">
+                        <p:card style="width: 25rem; margin-bottom: 2em;">
+                            <f:facet name="title">
+                                RetroArch
+                            </f:facet>
+                            <p>Emule uma variedade de consoles clássicos em um único lugar. Personalize suas configurações, 
+                                utilize filtros gráficos e desfrute de recursos como salvamento de estados e multiplayer online.
+                            </p>
+                        </p:card>
+                    </p:link>
+                </ui:define>
+            </ui:composition>
+        </div>
+    </h:body>
+</html>
+

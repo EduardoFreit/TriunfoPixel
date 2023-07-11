@@ -21,6 +21,8 @@
                 <p:menuitem value="Consoles" icon="pi pi-fw pi-desktop" url="/TriunfoPixel/consoles.xhtml" outcome="null"/>
                 <p:divider layout="vertical" rendered="#{gameBean.usuario.isAdmin}"/>
                 <p:menuitem value="Usuários" icon="pi pi-fw pi-user" url="/TriunfoPixel/users.xhtml" outcome="null" rendered="#{gameBean.usuario.isAdmin}"/>
+                <p:divider layout="vertical"/>
+                <p:menuitem value="Links Úteis" icon="pi pi-fw pi-link" url="/TriunfoPixel/links.xhtml" outcome="null"/>
                 <f:facet name="options">
                     <p:commandButton value="Logout" action="#{loginBean.logout}" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
                 </f:facet>

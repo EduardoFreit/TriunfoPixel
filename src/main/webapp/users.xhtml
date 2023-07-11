@@ -14,6 +14,40 @@
                 <ui:define name="title">Usuários</ui:define>
                 <ui:define name="content">
                     <h2>Usuários</h2>
+                    <p:dataTable id="tableConsoles" var="usuario" value="#{usuarioBean.listUsuarios}"
+                                     widgetVar="consoleTable" multiViewState="true" rows="5" paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10" rowKey="#{usuario.id}"
+                                     emptyMessage="Nenhum Console Encontrado">
+
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Buscar: " class="me-2"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('consoleTable').filter()" class="w-150"
+                                                 placeholder="Digite o nome do usuário"/>
+                                </p:outputPanel>
+                            </f:facet>
+
+                        <p:column headerText="Nome" filterBy="#{usuario.name}" sortBy="#{usuario.name}"
+                                      filterMatchMode="contains" sortOrder="ascending" >
+                            <h:outputText value="#{usuario.name}"/>
+                            </p:column>
+
+                        <p:column headerText="Email" filterBy="#{usuario.email}" sortBy="#{usuario.email}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{usuario.email}"/>
+                            </p:column>                   
+
+                        <p:column headerText="Usuário Administrador" filterBy="#{usuario.isAdmin}" sortBy="#{usuario.isAdmin}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{usuario.isAdmin}"/>
+                            </p:column>   
+                        
+                        <p:column headerText="Senha" filterBy="#{usuario.password}" sortBy="#{usuario.password}"
+                                      filterMatchMode="contains">
+                            <h:outputText value="#{usuario.password}"/>
+                            </p:column>
+                        </p:dataTable>
                 </ui:define>
             </ui:composition>
         </div>

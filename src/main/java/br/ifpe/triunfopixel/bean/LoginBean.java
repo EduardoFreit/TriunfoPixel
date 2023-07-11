@@ -4,6 +4,8 @@ import br.ifpe.triunfopixel.model.Usr;
 import br.ifpe.triunfopixel.service.UserService;
 import br.ifpe.triunfopixel.util.Util;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -96,4 +98,6 @@ public class LoginBean implements Serializable {
     public String logout() {
         return this.userService.logout();
     }
+    
 }
+

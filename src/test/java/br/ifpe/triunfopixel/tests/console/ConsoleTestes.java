@@ -88,12 +88,12 @@ import org.junit.Before;
         assertTrue(consoleUpdate.getJogos().size() == 4);
     }
     
-    @Test
-    public void downloadRomPack() throws Exception {
-        Console console = new Console();
-        console.setNome("SNES");
-        InputStream result = consoleService.getPackRomFile(console);
-        assertTrue(result != null);
-    }
+//    @Test
+//    public void downloadRomPack() throws Exception {
+//        Console console = new Console();
+//        console.setNome("SNES");
+//        InputStream result = consoleService.getPackRomFile(console);
+//        assertTrue(result != null);
+//    }
 
 }

@@ -64,8 +64,11 @@
                                     <p:confirm message="Tem certeza que deseja deletar o jogo?" icon="pi pi-trash"/>
                                 </p:commandButton>
 
-                                <p:commandButton rendered="#{false}" oncomplete="" update="" style="margin: 1px"
-                                                 styleClass="ui-button-warning" icon="pi pi-pencil" title="Editar Jogo">                      
+                                <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="PF('updateGameDialog').show()" style="margin: 1px"
+                                                 update=":form:tableGames :form:growl :updateDialog" styleClass="ui-button-warning" icon="pi pi-pencil"
+                                                 title="Editar Jogo" action="#{gameBean.preencheCamposComSelectedGameValores()}">
+                                    <f:setPropertyActionListener value="#{game}"
+                                                                 target="#{gameBean.selectedGame}"/>
                                 </p:commandButton>
                             </p:column>
 

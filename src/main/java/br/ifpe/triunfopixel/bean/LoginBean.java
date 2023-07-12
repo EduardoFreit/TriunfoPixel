@@ -11,7 +11,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -31,7 +30,7 @@ public class LoginBean implements Serializable {
     private final UserService userService = new UserService();
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "O campo 'Email' deve ser um endereço de email válido.")
     private String email;
-    @NotEmpty(message = "Digite a 'Senha'")
+    @NotNull(message = "Digite a 'Senha'")
     private String password;
     @NotNull(message = "O campo 'Nome' é obrigatório.")
     @Size(min = 2, max = 255, message = "O tamanho do campo 'Nome' deve ser entre 2 e 255 caractéres")

@@ -36,7 +36,7 @@ public class GameBean implements Serializable {
 
     private List<Game> listGames = new ArrayList<>();
     private Game selectedGame = new Game();
-     private StreamedContent file;
+    private StreamedContent file;
     private Usr usuario;
 
     @Getter(AccessLevel.NONE)
@@ -110,6 +110,41 @@ public class GameBean implements Serializable {
         urlRoom = "";
         genre = "";
         hash = "";
+    }
+
+    public void update() {
+        selectedGame.setName(name);
+        selectedGame.setUrlImagem(urlImagem);
+        selectedGame.setGenre(genre);
+        selectedGame.setHash(hash);
+        selectedGame.setConsole(console);
+        
+        Boolean atualizacaoSucesso = gameService.update(selectedGame);
+        
+        PrimeFaces.current().executeScript("PF('updateGameDialog').hide()");
+        listGames = gameService.listAll();
+        PrimeFaces.current().ajax().update("form:tableGames");
+        
+        limparCampos();
+        
+        FacesMessage message;
+
+        if(atualizacaoSucesso) {
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Jogo " + selectedGame.getName() + " editado com sucesso!", null);
+        } else {
+            message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao editar jogo. Contate o suporte!", null);
+        }
+
+        Util.getFacesContext().addMessage(null, message);
+    }
+    
+    // Preenche os campos do modal atuazicao de jogo com os valores do jogo selecionado quando o modal for acionado
+    public void preencheCamposComSelectedGameValores() {
+        name = selectedGame.getName();
+        urlImagem = selectedGame.getUrlImagem();
+        genre = selectedGame.getGenre();
+        hash = selectedGame.getHash();
+        console = selectedGame.getConsole();
     }
 
     public void deletaJogo() {

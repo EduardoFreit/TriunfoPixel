@@ -69,27 +69,75 @@ import org.junit.Before;
     }
     
     @Test
-    public void consoleMenosDoisCaracteres() {
+    public void consoleNomeMenosDoisCaracteres() {
         Console newConsole = new Console();
         newConsole.setNome("N");
-        newConsole.setAnoLancamento(1990L);
-        newConsole.setFabricante("M");
-        newConsole.setUrlImagem("M");
+        newConsole.setFabricante("Sony");
+        newConsole.setAnoLancamento(1994L);
+        newConsole.setUrlImagem("https://url.com");
         
         Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
-        assertEquals(4, constraintViolations.size());
+        assertEquals(1, constraintViolations.size());
     }
     
     @Test
-    public void consoleMenos255Caracteres() {
+    public void consoleFabricanteMenosDoisCaracteres() {
+        Console newConsole = new Console();
+        newConsole.setNome("PlayStation");
+        newConsole.setFabricante("S");
+        newConsole.setAnoLancamento(1994L);
+        newConsole.setUrlImagem("https://url.com");
+        
+        Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void consoleImagemMenosDoisCaracteres() {
+        Console newConsole = new Console();
+        newConsole.setNome("PlayStation");
+        newConsole.setFabricante("Sony");
+        newConsole.setAnoLancamento(1994L);
+        newConsole.setUrlImagem("H");
+        
+        Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
+        assertEquals(2, constraintViolations.size());
+    }
+    
+    @Test
+    public void consoleNomeMenos255Caracteres() {
         Console newConsole = new Console();
         newConsole.setNome(string260);
-        newConsole.setAnoLancamento(1990L);
+        newConsole.setFabricante("Sony");
+        newConsole.setAnoLancamento(1994L);
+        newConsole.setUrlImagem("https://url.com");
+        
+        Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void consoleFabricanteMenos255Caracteres() {
+        Console newConsole = new Console();
+        newConsole.setNome("Nome");
         newConsole.setFabricante(string260);
+        newConsole.setAnoLancamento(1994L);
+        newConsole.setUrlImagem("https://url.com");
+        
+        Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void consoleImagemMenos255Caracteres() {
+        Console newConsole = new Console();
+        newConsole.setNome("PlayStation");
+        newConsole.setFabricante("Nome");
+        newConsole.setAnoLancamento(1994L);
         newConsole.setUrlImagem(string260);
         
         Set<ConstraintViolation<Console>> constraintViolations = validator.validate(newConsole);
-        assertEquals(4, constraintViolations.size());
+        assertEquals(2, constraintViolations.size());
     }
     
     @Test

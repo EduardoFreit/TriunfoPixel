@@ -107,31 +107,145 @@ import org.junit.Before;
     }
     
     @Test
-    public void gameCamposMenosDoisCaracteres() {
+    public void gameNomeMenosDoisCaracteres() {
         Game newGame = new Game();
         newGame.setConsole(console1);
         newGame.setName("A");
-        newGame.setGenre("F");
-        newGame.setUrlImagem("t");
-        newGame.setUrlRoom("g");
-        newGame.setHash("t");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlRoom("https://media.retroachievements.org/Images/054485.png");
+        newGame.setHash("Pasjm124HXS");
         
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
-        assertEquals(7, constraintViolations.size());
+        assertEquals(1, constraintViolations.size());
     }
     
     @Test
-    public void gameCamposMais255Caracteres() {
+    public void gameGenreMenosDoisCaracteres() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("A");
+        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlRoom("https://media.retroachievements.org/Images/054485.png");
+        newGame.setHash("Pasjm124HXS");
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameImagemMenosDoisCaracteres() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("A");
+        newGame.setUrlRoom("https://media.retroachievements.org/Images/054485.png");
+        newGame.setHash("Pasjm124HXS");
+        
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(2, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameRomMenosDoisCaracteres() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlRoom("A");
+        newGame.setHash("Pasjm124HXS");
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(2, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameHashMenosDoisCaracteres() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlRoom("https://media.retroachievements.org/Images/054485.png");
+        newGame.setHash("A");
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameNomeMais255Caracteres() {
         Game newGame = new Game();
         newGame.setConsole(console1);
         newGame.setName(string260);
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlRoom("https://media.retroachievements.org/Images/054485.png");
+        newGame.setHash("Pasjm124HXS");
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameGenreMais255Caracteres() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
         newGame.setGenre(string260);
+        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlRoom("https://media.retroachievements.org/Images/054485.png");
+        newGame.setHash("Pasjm124HXS");
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(1, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameImagemMais255Caracteres() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("First-Person Shooter");
         newGame.setUrlImagem(string260);
+        newGame.setUrlRoom("https://media.retroachievements.org/Images/054485.png");
+        newGame.setHash("Pasjm124HXS");
+        
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(2, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameRomMais255Caracteres() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
         newGame.setUrlRoom(string260);
+        newGame.setHash("Pasjm124HXS");
+        
+        Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
+        assertEquals(2, constraintViolations.size());
+    }
+    
+    @Test
+    public void gameHashsMais255Caracteres() {
+        Game newGame = new Game();
+        newGame.setConsole(console1);
+        newGame.setName("Alien Trilogy");
+        newGame.setGenre("First-Person Shooter");
+        newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlRoom("https://media.retroachievements.org/Images/054485.png");
         newGame.setHash(string260);
         
         Set<ConstraintViolation<Game>> constraintViolations = validator.validate(newGame);
-        assertEquals(7, constraintViolations.size());
+        assertEquals(1, constraintViolations.size());
     }
     
     @Test

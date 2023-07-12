@@ -81,6 +81,7 @@ public class GameBean implements Serializable {
         Game newGame = new Game();
         newGame.setName(name);
         newGame.setUrlImagem(urlImagem);
+        newGame.setUrlRoom(urlRoom);
         newGame.setGenre(genre);
         newGame.setHash(hash);
         newGame.setConsole(console);
@@ -142,6 +143,7 @@ public class GameBean implements Serializable {
     public void preencheCamposComSelectedGameValores() {
         name = selectedGame.getName();
         urlImagem = selectedGame.getUrlImagem();
+        urlRoom = selectedGame.getUrlRoom();
         genre = selectedGame.getGenre();
         hash = selectedGame.getHash();
         console = selectedGame.getConsole();

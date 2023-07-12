@@ -104,9 +104,9 @@
                                             </p:column>
                                             <p:column headerText="Ações" style="width:6rem;text-align: center;">
                                                 <p:commandButton disableOnAjax="false" 
-                                                        title="Download Jogo"
-                                                        icon="pi pi-cloud-download">
-                                                    <p:fileDownload value="#{consoleBean.downloadGame(game)}" />
+                                                                 action="#{consoleBean.prepareDownloadGame(game.urlRoom)}"     
+                                                                 title="Download Jogo"
+                                                                 icon="pi pi-cloud-download">
                                                 </p:commandButton>
                                             </p:column>
 

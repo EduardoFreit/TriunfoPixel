@@ -3,7 +3,6 @@ package br.ifpe.triunfopixel.tests.game;
 import br.ifpe.triunfopixel.model.Console;
 import br.ifpe.triunfopixel.model.Game;
 import br.ifpe.triunfopixel.tests.Teste;
-import java.io.InputStream;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -38,6 +37,7 @@ import org.junit.Before;
         newGame.setName("Alien Trilogy");
         newGame.setGenre("First-Person Shooter");
         newGame.setUrlImagem("https://media.retroachievements.org/Images/054485.png");
+        newGame.setUrlRoom("https://media.retroachievements.org/Images/054485.png");
         newGame.setHash("Pasjm124HXS");
         
         gameService.insert(newGame);
@@ -79,12 +79,5 @@ import org.junit.Before;
         
         listGames = gameService.listAll();
         assertTrue(listGames.size() == 19);
-    }
-    
-    @Test
-    public void downloadRom() throws Exception {
-        Game game = gameService.findById(1L);
-        InputStream result = gameService.getRomFile(game);
-        assertTrue(result != null);
     }
 }

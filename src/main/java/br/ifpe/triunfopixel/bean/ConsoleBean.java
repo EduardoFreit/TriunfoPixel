@@ -40,6 +40,7 @@ public class ConsoleBean implements Serializable {
     private List<Console> listConsoles = new ArrayList<>();
     private Console selectedConsole = new Console();
     private StreamedContent file;
+    private StreamedContent fileGame;
     private Usr usuario;
 
     @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
@@ -94,6 +95,15 @@ public class ConsoleBean implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+    
+    public void prepareDownloadGame(String url) {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().redirect(url);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

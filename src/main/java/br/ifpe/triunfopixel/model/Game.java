@@ -36,12 +36,12 @@ public class Game implements Serializable {
         message = "Insira uma URL Válida para o campo 'UrlImagem")
     private String urlImagem;
     
-//    @NotNull(message = "O campo 'UrlRoom' é obrigatório.")
-//    @Size(min = 2, max = 255, message = "O campo 'UrlRoom' não pode ter menos de 2 ou mais de 255 caractéres.")
-//    @Column(nullable = false)
-//    @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
-//        message = "Insira uma URL Válida para o campo 'UrlRoom")
-//    private String urlRoom;
+    @NotNull(message = "O campo 'UrlRoom' é obrigatório.")
+    @Size(min = 2, max = 255, message = "O campo 'UrlRoom' não pode ter menos de 2 ou mais de 255 caractéres.")
+    @Column(nullable = false)
+    @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
+        message = "Insira uma URL Válida para o campo 'UrlRoom")
+    private String urlRoom;
     
     @NotNull(message = "O campo 'Gênero' é obrigatório.")
     @Size(min = 2, max = 255, message = "O campo 'Gênero' não pode ter menos de 2 ou mais de 255 caractéres.")

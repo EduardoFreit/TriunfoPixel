@@ -59,7 +59,7 @@ public class ConsoleBean implements Serializable {
     @NotNull(message = "O campo URL DA IMAGEM é obrigatório.")
     @Size(min = 4, max = 255, message = "O campo URL DA IMAGEM não pode ter menos de 2 ou mais de 255 caractéres.")
     @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
-        message = "Insira uma URL Válida para o campo URL DA IMAGEM")
+            message = "Insira uma URL Válida para o campo URL DA IMAGEM")
     private String urlImagem;
 
     @PostConstruct
@@ -104,11 +104,60 @@ public class ConsoleBean implements Serializable {
         limparCampos();
 
         FacesMessage message;
-        
-        if(cadastroSucesso) {
+
+        if (cadastroSucesso) {
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Console " + newConsole.getNome() + " adicionado com sucesso!", null);
         } else {
             message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao cadastrar Console. Contate o suporte!", null);
+        }
+
+        Util.getFacesContext().addMessage(null, message);
+    }
+
+    private Console selectedConsoleToUpdate = new Console();
+
+    public Console getSelectedConsoleToUpdate() {
+        return selectedConsoleToUpdate;
+    }
+
+    public void setSelectedConsoleToUpdate(Console selectedConsoleToUpdate) {
+        this.selectedConsoleToUpdate = selectedConsoleToUpdate;
+    }
+
+    public void editConsole(Console console) {
+        selectedConsoleToUpdate = new Console();
+        selectedConsoleToUpdate.setId(console.getId());
+        selectedConsoleToUpdate.setNome(console.getNome());
+        selectedConsoleToUpdate.setAnoLancamento(console.getAnoLancamento());
+        selectedConsoleToUpdate.setFabricante(console.getFabricante());
+        selectedConsoleToUpdate.setUrlImagem(console.getUrlImagem());
+    }
+
+    public void preencheCamposComSelectedConsoleValores() {
+        name = selectedConsole.getNome();
+        urlImagem = selectedConsole.getUrlImagem();
+        year = Long.toString(selectedConsole.getAnoLancamento());
+        manufacturer = selectedConsole.getFabricante();
+    }
+
+    public void update() {
+        selectedConsole.setNome(name);
+        selectedConsole.setAnoLancamento(Long.parseLong(year));
+        selectedConsole.setFabricante(manufacturer);
+        selectedConsole.setUrlImagem(urlImagem);
+
+        Boolean atualizacaoSucesso = consoleService.update(selectedConsole);
+
+        PrimeFaces.current().executeScript("PF('updateConsoleDialog').hide()");
+        listConsoles = consoleService.listAll();
+        PrimeFaces.current().ajax().update("form:tableConsoles");
+        limparCampos();
+
+        FacesMessage message;
+        if (atualizacaoSucesso) {
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Console atualizado com sucesso!", null);
+        } else {
+            message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao atualizar Console. Contate o suporte!", null);
         }
 
         Util.getFacesContext().addMessage(null, message);
@@ -131,5 +180,5 @@ public class ConsoleBean implements Serializable {
 
         PrimeFaces.current().ajax().update("form:tableConsoles");
     }
-
+    
 }

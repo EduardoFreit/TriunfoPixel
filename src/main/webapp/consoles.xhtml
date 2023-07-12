@@ -13,8 +13,10 @@
             <ui:composition template="/basicTemplate.xhtml">
                 <ui:define name="title">Consoles</ui:define>
                 <ui:define name="content">
+                    <p:growl id="growl" showDetail="false" life="5000"/>
+
                     <h1>Consoles</h1>
-                    <p:commandButton rendered="#{gameBean.usuario.isAdmin}" oncomplete="PF('registerConsoleDialog').show()" style="margin: 10px; width: 120px"
+                    <p:commandButton rendered="#{consoleBean.usuario.isAdmin}" oncomplete="PF('registerConsoleDialog').show()" style="margin: 10px; width: 120px"
                                      styleClass="ui-button-success" title="Cadastrar Console" value="Cadastrar" icon="pi pi-plus">                      
                     </p:commandButton>
                     <div class="card">
@@ -46,7 +48,7 @@
                                       filterMatchMode="contains">
                                 <h:outputText value="#{console.fabricante}"/>
                             </p:column>
-                            
+
                             <p:column headerText="Ações" style="width:10rem;text-align: center;">
                                 <p:commandButton  oncomplete="PF('gamesDialog').show()" update=":form:gamesDetail" style="margin: 1px"
                                                   icon="pi pi-list" title="Listar Jogos">
@@ -57,14 +59,17 @@
                                                   icon="pi pi-info-circle" title="Detalhe do Console" action="#{consoleBean.prepareDownloadRomPack(console)}">
                                 </p:commandButton>                                                      
 
-                                <p:commandButton update=":form:tableConsoles" style="margin: 1px" action="#{consoleBean.deletarConsole()}"
-                                                 styleClass="ui-button-danger" icon="pi pi-trash" title="Apagar Console" rendered="#{gameBean.usuario.isAdmin}" >       
+                                <p:commandButton rendered="#{consoleBean.usuario.isAdmin}" update=":form:tableConsoles" style="margin: 1px" action="#{consoleBean.deletarConsole()}"
+                                                 styleClass="ui-button-danger" icon="pi pi-trash" title="Apagar Console" rendered="#{true}" >       
                                     <f:setPropertyActionListener value="#{console}"
                                                                  target="#{consoleBean.selectedConsole}"/>
                                     <p:confirm message="Tem certeza que deseja deletar o console?" icon="pi pi-trash"/>
-                                </p:commandButton>                                
-                                <p:commandButton rendered="#{false}" oncomplete="" update="" style="margin: 1px"
-                                                 styleClass="ui-button-warning" icon="pi pi-pencil" title="Editar Console">                      
+                                </p:commandButton>
+                                <p:commandButton rendered="#{consoleBean.usuario.isAdmin}"  oncomplete="PF('updateConsoleDialog').show()" style="margin: 1px"
+                                                 update=":form:tableConsoles :form:growl :updateGameDialog" styleClass="ui-button-warning" icon="pi pi-pencil"
+                                                 title="Editar Console" action="#{consoleBean.preencheCamposComSelectedConsoleValores()}">
+                                    <f:setPropertyActionListener value="#{console}"
+                                                                 target="#{consoleBean.selectedConsole}"/>
                                 </p:commandButton>
                             </p:column>                           
                         </p:dataTable>

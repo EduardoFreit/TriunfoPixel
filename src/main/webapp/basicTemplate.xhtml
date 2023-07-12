@@ -73,7 +73,7 @@
                   showEffect="fade" resizable="false" draggable="false" onHide="#{gameBean.limparCampos()}">
             <h:form>
                 <p:growl showDetail="false" life="5000"/>
-                
+
                 <p:panelGrid id="updatePanelGrid" columns="2" styleClass="ui-panelgrid-blank ui-fluid">
                     <p:outputLabel for="@next" value="Nome" style="font-weight: bold"/>
                     <p:inputText id="name" value="#{gameBean.name}" label="Name"/>
@@ -93,10 +93,10 @@
                                        itemLabel="#{console.nome}" itemValue="#{console}"/>
                     </p:selectOneMenu>
                 </p:panelGrid>
-                
+
                 <div align="right" style="margin-top: 24px">
                     <p:commandButton value="Cancelar" onclick="PF('updateGameDialog').hide()"
-                                style="margin-right: 16px" styleClass="ui-button-flat ui-button-danger"/>
+                                     style="margin-right: 16px" styleClass="ui-button-flat ui-button-danger"/>
 
                     <p:commandButton update="@form @(#gameTable)" action="#{gameBean.update}" value="Editar"/>
                 </div>
@@ -128,6 +128,34 @@
                                      style="margin-right: 16px" styleClass="ui-button-flat ui-button-danger"/>
 
                     <p:commandButton update="@form @(#gameTable)" action="#{consoleBean.registerConsole}" value="Cadastrar"/>
+                </div>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="updateGameDialog" header="Editar Console" widgetVar="updateConsoleDialog" modal="true"
+                  showEffect="fade" resizable="false" draggable="false" onHide="#{consoleBean.limparCampos()}">
+            <h:form>
+                <p:growl showDetail="false" life="5000"/>
+
+                <p:panelGrid id="updatePanelGrid" columns="2" styleClass="ui-panelgrid-blank ui-fluid">
+                    <p:outputLabel for="@next" value="Nome" style="font-weight: bold"/>
+                    <p:inputText id="name" value="#{consoleBean.name}" label="Name"/>
+
+                    <p:outputLabel for="@next" value="Ano de Lançamento" style="font-weight: bold"/>
+                    <p:inputText value="#{consoleBean.year}"/>
+
+                    <p:outputLabel for="@next" value="Fabricante" style="font-weight: bold"/>
+                    <p:inputText value="#{consoleBean.manufacturer}"/>
+
+                    <p:outputLabel for="@next" value="URL da Imagem" style="font-weight: bold"/>
+                    <p:inputText value="#{consoleBean.urlImagem}"/>
+                </p:panelGrid>
+
+                <div align="right" style="margin-top: 24px">
+                    <p:commandButton value="Cancelar" onclick="PF('updateConsoleDialog').hide()"
+                                     style="margin-right: 16px" styleClass="ui-button-flat ui-button-danger"/>
+
+                    <p:commandButton update="@form @(#consoleTable)" action="#{consoleBean.update}" value="Editar"/>
                 </div>
             </h:form>
         </p:dialog>

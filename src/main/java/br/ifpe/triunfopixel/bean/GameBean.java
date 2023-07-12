@@ -160,9 +160,9 @@ public class GameBean implements Serializable {
     public void prepareDownload(Game game) throws Exception {
         this.selectedGame = game;
         try {
-            InputStream it = gameService.getRomFile(selectedGame);
+            InputStream it = gameService.getRomFile(game);
             file = DefaultStreamedContent.builder()
-                    .name(selectedGame.getName() + ".zip")
+                    .name(game.getName() + ".zip")
                     .contentType("application/zip")
                     .stream(() -> it)
                     .build();

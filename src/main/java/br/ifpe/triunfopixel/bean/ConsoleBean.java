@@ -1,8 +1,10 @@
 package br.ifpe.triunfopixel.bean;
 
 import br.ifpe.triunfopixel.model.Console;
+import br.ifpe.triunfopixel.model.Game;
 import br.ifpe.triunfopixel.model.Usr;
 import br.ifpe.triunfopixel.service.ConsoleService;
+import br.ifpe.triunfopixel.service.GameService;
 import br.ifpe.triunfopixel.util.Util;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,9 +42,11 @@ public class ConsoleBean implements Serializable {
     private StreamedContent file;
     private Usr usuario;
 
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
     private final ConsoleService consoleService = new ConsoleService();
+    
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+    private final GameService gameService = new GameService();
 
     @NotNull(message = "O campo NOME é obrigatório.")
     @Size(min = 2, max = 255, message = "O campo NOME não pode ter menos de 2 ou mais de 255 caractéres.")
@@ -79,12 +83,17 @@ public class ConsoleBean implements Serializable {
                 .build();
     }
 
-    public void prepareDownloadGame(String url) {
+    public StreamedContent downloadGame(Game game) throws Exception {
         try {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.getExternalContext().redirect(url);
+            InputStream it = gameService.getRomFile(game);
+            return DefaultStreamedContent.builder()
+                    .name(game.getName() + ".zip")
+                    .contentType("application/zip")
+                    .stream(() -> it)
+                    .build();
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
     }
 

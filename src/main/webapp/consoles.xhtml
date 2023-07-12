@@ -57,19 +57,20 @@
                                 </p:commandButton>
                                 <p:commandButton  oncomplete="PF('consoleDialog').show()" update=":form:consoleDetail" style="margin: 1px"
                                                   icon="pi pi-info-circle" title="Detalhe do Console" action="#{consoleBean.prepareDownloadRomPack(console)}">
-                                </p:commandButton>                                                      
-
-                                <p:commandButton rendered="#{consoleBean.usuario.isAdmin}" update=":form:tableConsoles" style="margin: 1px" action="#{consoleBean.deletarConsole()}"
-                                                 styleClass="ui-button-danger" icon="pi pi-trash" title="Apagar Console" rendered="#{true}" >       
-                                    <f:setPropertyActionListener value="#{console}"
-                                                                 target="#{consoleBean.selectedConsole}"/>
-                                    <p:confirm message="Tem certeza que deseja deletar o console?" icon="pi pi-trash"/>
-                                </p:commandButton>
-                                <p:commandButton rendered="#{consoleBean.usuario.isAdmin}"  oncomplete="PF('updateConsoleDialog').show()" style="margin: 1px"
+                                </p:commandButton> 
+                                
+                                <p:commandButton rendered="#{consoleBean.usuario.isAdmin}" oncomplete="PF('updateConsoleDialog').show()" style="margin: 1px"
                                                  update=":form:tableConsoles :form:growl :updateGameDialog" styleClass="ui-button-warning" icon="pi pi-pencil"
                                                  title="Editar Console" action="#{consoleBean.preencheCamposComSelectedConsoleValores()}">
                                     <f:setPropertyActionListener value="#{console}"
                                                                  target="#{consoleBean.selectedConsole}"/>
+                                </p:commandButton>
+
+                                <p:commandButton rendered="#{consoleBean.usuario.isAdmin}" update=":form:tableConsoles" style="margin: 1px" action="#{consoleBean.deletarConsole()}"
+                                                 styleClass="ui-button-danger" icon="pi pi-trash" title="Apagar Console" >       
+                                    <f:setPropertyActionListener value="#{console}"
+                                                                 target="#{consoleBean.selectedConsole}"/>
+                                    <p:confirm message="Tem certeza que deseja deletar o console?" icon="pi pi-trash"/>
                                 </p:commandButton>
                             </p:column>                           
                         </p:dataTable>
@@ -103,9 +104,9 @@
                                             </p:column>
                                             <p:column headerText="Ações" style="width:6rem;text-align: center;">
                                                 <p:commandButton disableOnAjax="false" 
-                                                                 action="#{consoleBean.prepareDownloadGame(game.urlRoom)}"     
-                                                                 title="Download Jogo"
-                                                                 icon="pi pi-cloud-download">
+                                                        title="Download Jogo"
+                                                        icon="pi pi-cloud-download">
+                                                    <p:fileDownload value="#{consoleBean.downloadGame(game)}" />
                                                 </p:commandButton>
                                             </p:column>
 
